@@ -40,16 +40,19 @@ def _init_(self, x, y, Length, orientation, name):
 #It stores where every vehicle is sitting at that moment.
 class State:
      """Represents one board configuration at a specific moment."""
-     def __init__(self ,vehicles,moves+0):
-     """  vehicles ->list of all vehicle object on the board
+     def __init__(self ,vehicles,moves=0):
+         """  vehicles ->list of all vehicle object on the board
             moves  ->number of moves taken to reach this state (this isg(n))"""
       self.vehicles=vehicles
       self.moves=moves
-      def__hash__(self,other):
-     """Two states are the same if every v ehicles is at the same position."""
-       return all(
+      def__hash__(self):
+         """needed so python can store states in  a set to track visited ones."""
+         return hash (tuple((v.x,v.y) for v in self.vehicles))
+      def__eq__(self,other):
+         """Two states are the same if every v ehicles is at the same position."""
+         return all(
          self.vehicles[i].x==other.vehicles[i].x and self.vehicles[i].y==other.vehicles[i].y for i in range (len(self.vehicles))
-       )
+         )
 
      
 
