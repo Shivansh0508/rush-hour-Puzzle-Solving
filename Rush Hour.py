@@ -54,6 +54,4 @@ class State:
          self.vehicles[i].x==other.vehicles[i].x and self.vehicles[i].y==other.vehicles[i].y for i in range (len(self.vehicles))
          )
 
-     
-
 #March 24 - Add project setup, imports and Vehicle class
