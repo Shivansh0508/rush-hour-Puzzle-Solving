@@ -10,7 +10,7 @@
 #   H1 - count how many cars are blocking the red car
 #   H2 - H1 + how far the red car still needs to travel
 
-import heaapq                           # used for priority queue in Greedy and A*
+import heapq                           # used for priority queue in Greedy and A*
 from collections import deque           # used for BFS queue
 import copy                             # used to copy the board without changing original
 import matplotlib.pyplot as plt         # used to draw the board
@@ -23,15 +23,13 @@ tie_breaker = count()                   # counter helps the priority queue break
 os.makedirs("output" , exist_ok=True)   # create the output folder if it does not already exist
 # VEHICLE CLASS #
 # Stores the position , size , direction , and name of one vehicle
-class Vehicle:  """Stores all information about one car or truck on the board."""
+class Vehicle:
 def _init_(self, x, y, Length, orientation, name):
-  """
-        x           : column number, 0 is the left edge
+  """   x           : column number, 0 is the left edge
         y           : row number, 0 is the top edge
         length      : how many cells it takes up (2 or 3)
         orientation : H means horizontal, V means vertical
-        name        : one letter label, R is always the red car
-        """
+        name        : one letter label, R is always the red car  """
   self.x = x
   self.y = y
   self.length = length
