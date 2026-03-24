@@ -31,9 +31,26 @@ def _init_(self, x, y, Length, orientation, name):
         orientation : H means horizontal, V means vertical
         name        : one letter label, R is always the red car  """
   self.x = x
-  self.y = y
+  self.y = y  
   self.length = length
   self.orientation = orientation
   self.name = name
+#STATE CLASS 
+#A State is one compplete snapshot of the board.
+#It stores where every vehicle is sitting at that moment.
+class State:
+     """Represents one board configuration at a specific moment."""
+     def __init__(self ,vehicles,moves+0):
+     """  vehicles ->list of all vehicle object on the board
+            moves  ->number of moves taken to reach this state (this isg(n))"""
+      self.vehicles=vehicles
+      self.moves=moves
+      def__hash__(self,other):
+     """Two states are the same if every v ehicles is at the same position."""
+       return all(
+         self.vehicles[i].x==other.vehicles[i].x and self.vehicles[i].y==other.vehicles[i].y for i in range (len(self.vehicles))
+       )
+
+     
 
 #March 24 - Add project setup, imports and Vehicle class
