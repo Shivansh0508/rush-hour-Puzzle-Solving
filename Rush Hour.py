@@ -6,7 +6,6 @@
 #   2. IDDFS  - like BFS but uses much less memory
 #   3. Greedy - uses a smart guess to search faster
 #   4. A*     - combines actual cost + smart guess, best overall
-
 #   Two heuristics are implemented:
 #   H1 - count how many cars are blocking the red car
 #   H2 - H1 + how far the red car still needs to travel
@@ -43,8 +42,8 @@ class State:
      def __init__(self, vehicles, moves=0):
          """  vehicles : list of all vehicle object on the board
                  moves : number of moves taken to reach this state """
-      self.vehicles = vehicles
-      self.moves = moves
+         self.vehicles = vehicles
+         self.moves = moves
       def__hash__(self):
          """needed so python can store states in  a set to track visited ones """
          return hash (tuple((v.x,v.y) for v in self.vehicles))
@@ -58,15 +57,22 @@ class State:
 # We use this to check if a cell is free before moving a vehicle.
 def make_grid(state):
     """Builds a 6x6 grid from the current state so we can check empty cells."""
-    # start with a completely empty board
-    grid = [['.' for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
-    # place each vehicle onto the grid
-    for v in state.vehicles:
+    grid = [['.' for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)] # start with a completely empty board
+    for v in state.vehicles:        # place each vehicle onto the grid
         if v.orientation == 'H':
-            for i in range(v.length):
-                grid[v.y][v.x + i] = v.name   # fill cells going right
+           for i in range(v.length):
+               grid[v.y][v.x + i] = v.name   # fill cells going right
         else:
-            for i in range(v.length):
-                grid[v.y + i][v.x] = v.name   # fill cells going down
-
-    return grid
+              for i in range(v.length):
+                  grid[v.y + i][v.x] = v.name   # fill cells going down
+    
+     return grid
+## COPY BOARD
+# Makes a fresh copy of the vehicle list so we can modify it
+# without changing the original state. This is important because each successor state must be completely independent.
+def copy_vehicles(vehicles):
+    """Returns a new list of Vehicle objects with the same values."""
+    new_list = []
+    for v in vehicles:
+        new_list.append(Vehicle(v.x, v.y, v.length, v.orientation, v.name))
+    return new_list
