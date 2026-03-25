@@ -76,3 +76,40 @@ def copy_vehicles(vehicles):
     for v in vehicles:
         new_list.append(Vehicle(v.x, v.y, v.length, v.orientation, v.name))
     return new_list
+#SHOW BOARD (live window during search)
+#only runs when SHOW_SEARCH =true.
+#Display the board as a colour image while the algorithm works.
+def show_board(state):
+  """shows the current board in a matplotlib window during search."""
+if not SHOW_SEARCH:
+  return
+try:
+  grid=make_grid(state)
+  #convert letters to numbers so matplotlib can colour them
+  # 0=empty, 1=normal car (blue), 2=red car(red)
+  colour_grid=np.zeros((BOARD_SIZE, BOARD_SIZE))
+  for row in range(BOARD_SIZE):
+    for col in range(BOARD_SIZE):
+      if grid[row][col]=='R':
+        colour_grid[row][col]=2
+      elif grid[row][col]!='.':
+        colour_grid[row][col]=1
+  plt.imshow(colour_grid, camp='coolwarm')
+  plt.grid(true)
+
+  # write the vehicle letter inside each occupied cell
+  for row in range(BOARD_SIZE):
+    for col in range(BOARD_SIZE):
+      if grid[row][col]!='.':
+         plt.text(col,row,grid[row][col], ha='center' , va='center')
+  plt.xticks([])
+  plt.yticks([])
+  plt.title(f"moves so far:{state.moves}")
+  plt.pause(0.2)
+  plt.clf()
+except:
+    pass   #skip silently if no display is available
+      
+      
+
+
