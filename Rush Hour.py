@@ -1,5 +1,5 @@
-                                         #Rush Hour Puzzle Solver
-                          #Group 15 | CS F401 Artificial intelligence | BITS Pilani 
+                                        #Rush Hour Puzzle Solver#
+                            # Group 15 | CS F401 Artificial intelligence | BITS Pilani 
 
 #We solve the Rush Hour puzzle using four search algorithms:
 #   1. BFS    - searches level by level, no hints used
@@ -36,9 +36,9 @@ def __init__(self, x, y, Length, orientation, name):
   self.length = length
   self.orientation = orientation
   self.name = name
-#STATE CLASS 
-#A State is one complete snapshot of the board
-#It stores where every vehicle is sitting at that moment
+# STATE CLASS 
+# A State is one complete snapshot of the board
+# It stores where every vehicle is sitting at that moment
 class State:
      def __init__(self, vehicles, moves=0):
          """  vehicles : list of all vehicle object on the board
@@ -51,8 +51,7 @@ class State:
       def__eq__(self,other):
          """Two states are the same if every vehicles is at the same position """
          return all(self.vehicles[i].x==other.vehicles[i].x and self.vehicles[i].y==other.vehicles[i].y 
-                    for i in range (len(self.vehicles))
-         )
+                    for i in range (len(self.vehicles)))
 # MAKE GRID
 # Converts a State into a simple 2D grid of letters.
 # Empty cells show a dot . Occupied cells show the vehicle name.
