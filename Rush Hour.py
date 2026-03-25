@@ -10,7 +10,7 @@
 #   H1 - count how many cars are blocking the red car
 #   H2 - H1 + how far the red car still needs to travel
 
-import heapq                           # used for priority queue in Greedy and A*
+import heapq                            # used for priority queue in Greedy and A*
 from collections import deque           # used for BFS queue
 import copy                             # used to copy the board without changing original
 import matplotlib.pyplot as plt         # used to draw the board
@@ -39,10 +39,9 @@ def _init_(self, x, y, Length, orientation, name):
 #A State is one compplete snapshot of the board.
 #It stores where every vehicle is sitting at that moment.
 class State:
-     """Represents one board configuration at a specific moment."""
      def __init__(self ,vehicles,moves=0):
          """  vehicles ->list of all vehicle object on the board
-            moves  ->number of moves taken to reach this state (this isg(n))"""
+            moves : number of moves taken to reach this state (this isg(n))"""
       self.vehicles=vehicles
       self.moves=moves
       def__hash__(self):
@@ -53,5 +52,3 @@ class State:
          return all(
          self.vehicles[i].x==other.vehicles[i].x and self.vehicles[i].y==other.vehicles[i].y for i in range (len(self.vehicles))
          )
-
-#March 24 - Add project setup, imports and Vehicle class
