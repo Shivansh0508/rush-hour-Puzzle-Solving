@@ -13,3 +13,5 @@ Run the solver:
 
 Outfit GIFs will be saved in the output/folder.
 Set SHOW_SEARCH = False to save gifs of the final output.
+
+## Algorithm Used
