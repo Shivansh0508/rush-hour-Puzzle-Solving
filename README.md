@@ -25,8 +25,18 @@ Runs DFS with increasing depth limits. Uses much less memory than BFS while stil
 **Greedy Best First Search**
 Always picks the state that looks closest to the goal using the heurestic. Fast but not guaranteed to be optimal.
 
+
 **A*Search**
 
 Combines actual move cost g(n) and heurestic h(n) using
 f(n) = g(n) + h(n)
 Optimal and efficient. 
+
+## Heuristics
+**H1-Blocking Vehicle Count**
+Counts how many vehicles are sitting between the red car and the exit.Each needs at least one move to clear.
+Admissible-never overestimates the true remaining cost.
+
+**H2-Blocking Count + Distance**
+Takes H1 and adds the remaining distance the red car must travel.Tighter estimate,still admissible .
+H2 dominates H1 so A* with H2 explores fewer states .
