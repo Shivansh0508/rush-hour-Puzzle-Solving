@@ -135,3 +135,18 @@ def next_states(state):
                 new_vehicles = copy_vehicles(state.vehicles)
                 new_vehicles[idx].x -= 1
                 possible_moves.append(State(new_vehicles, state.moves + 1))
+       else:
+            # try sliding this vehicle one step downward
+            one_down = v.y + v.length
+            if one_down < BOARD_SIZE and grid[one_down][v.x] == '.':
+                new_vehicles = copy_vehicles(state.vehicles)
+                new_vehicles[idx].y += 1
+                possible_moves.append(State(new_vehicles, state.moves + 1))
+            # try sliding this vehicle one step upward
+            one_up = v.y - 1
+            if one_up >= 0 and grid[one_up][v.x] == '.':
+                new_vehicles = copy_vehicles(state.vehicles)
+                new_vehicles[idx].y -= 1
+                possible_moves.append(State(new_vehicles, state.moves + 1))
+
+    return possible_moves
