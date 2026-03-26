@@ -24,3 +24,5 @@ Runs DFS with increasing depth limits. Uses much less memory than BFS while stil
 
 **Greedy Best First Search**
 Always picks the state that looks closest to the goal using the heurestic. Fast but not guaranteed to be optimal.
+
+**A*Search**
