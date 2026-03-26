@@ -61,7 +61,7 @@ def make_grid(state):
     for v in state.vehicles:        # place each vehicle onto the grid
         if v.orientation == 'H':
            for i in range(v.length):
-               grid[v.y][v.x + i] = v.name   # fill cells going right
+               grid[v.y][v.x + i] = v.name      # fill cells going right
         else:
               for i in range(v.length):
                   grid[v.y + i][v.x] = v.name   # fill cells going down
@@ -80,6 +80,7 @@ def copy_vehicles(vehicles):
 # only runs when SHOW_SEARCH =true
 # Display the board as a colour image while the algorithm works.
 def show_board(state):
+   """Shows the current board in a matplotlib window during search."""
 if not SHOW_SEARCH:
   return
 try:
@@ -106,7 +107,13 @@ try:
   plt.clf()
 except:
     pass   #skip silently if no display is available
-      
-      
+# REACHED EXIT
+# The puzzle is solved when the red car touches the right wall.
+# The exit is at column 5 on row 2.
+# vehicles[0] is always the red car R.
+def reached_exit(state):
+    """Returns True when the red car has reached column 5."""
+    red_car = state.vehicles[0]
+    return red_car.x + red_car.length - 1 == BOARD_SIZE - 1 
 
 
