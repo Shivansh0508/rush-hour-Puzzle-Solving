@@ -117,4 +117,12 @@ def reached_exit(state):
 # Given a board state, finds every state reachable in one move.
 # Each vehicle tries sliding one cell in both directions.
 # Only moves to empty cells are allowed.
-
+def next_states(state):
+    """Returns a list of all board states reachable in exactly one move."""
+    possible_moves = []
+    grid = make_grid(state)
+    for idx, v in enumerate(state.vehicles):
+        if v.orientation == 'H':
+            # try sliding this vehicle one step to the right
+            right_cell = v.x + v.length
+           
