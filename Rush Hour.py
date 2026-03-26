@@ -150,3 +150,16 @@ def next_states(state):
                 possible_moves.append(State(new_vehicles, state.moves + 1))
 
     return possible_moves
+# HEURISTIC 2 — Blocking Count + Distance (H2)
+#H1 plus how many cells the red car still needs to travel.
+#this is a tighter estimate and still never overestimates.
+#H2 is a always >= H1 so it is said to dominate H1.
+#A* with H2 explores fewer states than A* with H1.
+
+def h2_blocking_plus_distance(state):
+  """H2: H1 plus the remaining distance the red car must travel."""
+ red_car = state.vehicles[0]
+ blockers= h1_blocking_count(state)
+ distance_left =  (BOARD_SIZE-1)-(red_car.x+red_car.length-1)
+ return blockers + distance_left
+
