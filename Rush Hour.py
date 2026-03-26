@@ -1,6 +1,5 @@
                                                                                 #Rush Hour Puzzle Solver#
                                                                   # Group 15 | CS F401 Artificial intelligence | BITS Pilani 
-
 #We solve the Rush Hour puzzle using four search algorithms:
 #   1. BFS    - searches level by level, no hints used
 #   2. IDDFS  - like BFS but uses much less memory
@@ -9,7 +8,6 @@
 #   Two heuristics are implemented:
 #   H1 - count how many cars are blocking the red car
 #   H2 - H1 + how far the red car still needs to travel
-
 import heapq                            # used for priority queue in Greedy and A*
 from collections import deque           # used for BFS queue
 import copy                             # used to copy the board without changing original
@@ -115,5 +113,8 @@ def reached_exit(state):
     """Returns True when the red car has reached column 5."""
     red_car = state.vehicles[0]
     return red_car.x + red_car.length - 1 == BOARD_SIZE - 1 
-
+# NEXT STATES (successor generation)
+# Given a board state, finds every state reachable in one move.
+# Each vehicle tries sliding one cell in both directions.
+# Only moves to empty cells are allowed.
 
