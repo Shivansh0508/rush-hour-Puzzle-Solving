@@ -1,5 +1,5 @@
-                                        #Rush Hour Puzzle Solver#
-                            # Group 15 | CS F401 Artificial intelligence | BITS Pilani 
+                                                                                #Rush Hour Puzzle Solver#
+                                                                  # Group 15 | CS F401 Artificial intelligence | BITS Pilani 
 
 #We solve the Rush Hour puzzle using four search algorithms:
 #   1. BFS    - searches level by level, no hints used
@@ -95,10 +95,8 @@ try:
       elif grid[row][col]!='.':
         colour_grid[row][col]=1
   plt.imshow(colour_grid, camp='coolwarm')
-  plt.grid(true)
-
-  # write the vehicle letter inside each occupied cell
-  for row in range(BOARD_SIZE):
+  plt.grid(true)                                
+  for row in range(BOARD_SIZE): # write the vehicle letter inside each occupied cell
     for col in range(BOARD_SIZE):
       if grid[row][col]!='.':
          plt.text(col,row,grid[row][col], ha='center' , va='center')
