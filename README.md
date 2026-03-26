@@ -17,7 +17,7 @@ Set SHOW_SEARCH = False to save gifs of the final output.
 ## Algorithm Used
 
 **BFS(Breadth First Search)**
-Explore all states levelby level. Guaranteed to find the shortest solution. Does not use any heurestic.
+Explore all states level by level. Guaranteed to find the shortest solution. Does not use any heurestic.
 
 **IDDFS(Iterative Deepening DFS)**
 Runs DFS with increasing depth limits. Uses much less memory than BFS while still finding the optimal solution.
@@ -26,3 +26,7 @@ Runs DFS with increasing depth limits. Uses much less memory than BFS while stil
 Always picks the state that looks closest to the goal using the heurestic. Fast but not guaranteed to be optimal.
 
 **A*Search**
+
+Combines actual move cost g(n) and heurestic h(n) using
+f(n) = g(n) + h(n)
+Optimal and efficient. 
