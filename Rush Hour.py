@@ -152,7 +152,7 @@ def next_states(state):
 #HEURISTIC 1 — Blocking Vehicle Count (H1)
 # Counts how many cars are sitting between the red car and the exit on row 2. 
 # Each one needs at least one move to clear, so this is always a safe lower bound — admissible.
-ef h1_blocking_count(state):
+def h1_blocking_count(state):
     """H1: counts vehicles directly blocking the red car's path to exit."""
     grid = make_grid(state)
     red_car = state.vehicles[0]
@@ -167,11 +167,11 @@ ef h1_blocking_count(state):
 # H2 is a always >= H1 so it is said to dominate H1.
 # A* with H2 explores fewer states than A* with H1.
 def h2_blocking_plus_distance(state):
-  """H2: H1 plus the remaining distance the red car must travel."""
- red_car = state.vehicles[0]
- blockers = h1_blocking_count(state)
- distance_left =  (BOARD_SIZE-1) - (red_car.x + red_car.length-1)
- return blockers + distance_left
+    """H2: H1 plus the remaining distance the red car must travel."""
+    red_car = state.vehicles[0]
+    blockers = h1_blocking_count(state)
+    distance_left = EXIT_COL - (red_car.x + red_car.length - 1)
+    return blockers + distance_left
 # TRACE BACK (path reconstruction)
 # After the goal is found, walk backwards through parent
 # pointers to rebuild the full solution path from start to goal.
