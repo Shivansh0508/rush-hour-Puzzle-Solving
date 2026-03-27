@@ -82,8 +82,10 @@ def show_board(state):
         return
     try:
         grid = make_grid(state)
+        # convert letters to numbers so matplotlib can colour them
+        # 0 = empty (grey), 1 = normal car (blue), 2 = red car (red)
         colour_grid = np.zeros((BOARD_SIZE, BOARD_SIZE))
-        for row in range(BOARD_SIZE):
+        for row in range(BOARD_SIZE): 
             for col in range(BOARD_SIZE):
                 if grid[row][col] == 'R':
                     colour_grid[row][col] = 2 
@@ -91,7 +93,7 @@ def show_board(state):
                     colour_grid[row][col] = 1
         plt.imshow(colour_grid, cmap='coolwarm')
         plt.grid(True) 
-        for row in range(BOARD_SIZE):
+        for row in range(BOARD_SIZE): # write the vehicle letter inside each occupied cell
             for col in range(BOARD_SIZE):
                 if grid[row][col] != '.':
                     plt.text(col, row, grid[row][col], ha='center', va='center')
