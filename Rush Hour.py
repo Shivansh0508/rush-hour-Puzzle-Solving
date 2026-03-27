@@ -36,19 +36,22 @@ class Vehicle:
 # STATE CLASS 
 # A State is one complete snapshot of the board
 # It stores where every vehicle is sitting at that moment
-class State:
-    def __init__(self, vehicles, moves=0):
-        """vehicles : list of all vehicle object on the board
-           moves : number of moves taken to reach this state"""
-        self.vehicles = vehicles
-        self.moves = moves
-      def __hash__(self):
-         """needed so python can store states in  a set to track visited ones """
-         return hash (tuple((v.x,v.y) for v in self.vehicles))
-      def __eq__(self,other):
-         """Two states are the same if every vehicles is at the same position """
-         return all(self.vehicles[i].x==other.vehicles[i].x and self.vehicles[i].y==other.vehicles[i].y 
-                    for i in range (len(self.vehicles)))
+class State: 
+  "Represent one board configuration at a specific moment"
+  def __init__(self, vehicles, moves=0):
+    """vehicles : list of all vehicles objects on the board
+    moves : number of moves taken to reach this state
+    """
+    self.vehicles = vehicles
+    self.moves = moves 
+    def __hash__ (self):
+      "Needed so Python can store States in a set to track visited ones"
+      return hash(tuple((v.x, v.y) for v in self.vehicles))
+      def __eq__(self, other):
+        "two states are the same if every vehicle is at the same position"
+        return all(self.vehicle[i].x == other.vehicle[i].x and self.vehicle[i].y == other.vehcile[i].y 
+                   for i in range(len(self.vehicles))
+                  )
 # MAKE GRID
 # Converts a State into a simple 2D grid of letters.
 # Empty cells show a dot . Occupied cells show the vehicle name.
