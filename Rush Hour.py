@@ -65,7 +65,7 @@ def make_grid(state):
                   grid[v.y + i][v.x] = v.name   # fill cells going down
     
      return grid
-## COPY BOARD
+# COPY BOARD
 # Makes a fresh copy of the vehicle list so we can modify it
 # without changing the original state. This is important because each successor state must be completely independent.
 def copy_vehicles(vehicles):
@@ -150,9 +150,13 @@ def next_states(state):
                 possible_moves.append(State(new_vehicles, state.moves + 1))
 
     return possible_moves
+#HEURISTIC 1 — Blocking Vehicle Count (H1)
+# Counts how many cars are sitting between the red car and the exit on row 2. 
+# Each one needs at least one move to clear, so this is always a safe lower bound — admissible.
+
 # HEURISTIC 2 — Blocking Count + Distance (H2)
 # H1 plus how many cells the red car still needs to travel.
-# this is a tighter estimate and still never overestimates.
+# This is a tighter estimate and still never overestimates.
 # H2 is a always >= H1 so it is said to dominate H1.
 # A* with H2 explores fewer states than A* with H1.
 def h2_blocking_plus_distance(state):
