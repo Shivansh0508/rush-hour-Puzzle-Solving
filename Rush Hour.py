@@ -1,6 +1,6 @@
                                                                                 #Rush Hour Puzzle Solver#
                                                                   # Group 15 | CS F401 Artificial intelligence | BITS Pilani 
-#We solve the Rush Hour puzzle using four search algorithms:
+#   We solve the Rush Hour puzzle using four search algorithms:
 #   1. BFS    - searches level by level, no hints used
 #   2. IDDFS  - like BFS but uses much less memory
 #   3. Greedy - uses a smart guess to search faster
@@ -63,7 +63,6 @@ def make_grid(state):
         else:
               for i in range(v.length):
                   grid[v.y + i][v.x] = v.name   # fill cells going down
-    
      return grid
 # COPY BOARD
 # Makes a fresh copy of the vehicle list so we can modify it
@@ -125,10 +124,10 @@ def next_states(state):
         if v.orientation == 'H':
             # try sliding this vehicle one step to the right
             right_cell = v.x + v.length
-           f right_cell < BOARD_SIZE and grid[v.y][right_cell] == '.':
-                new_vehicles = copy_vehicles(state.vehicles)
-                new_vehicles[idx].x += 1
-                possible_moves.append(State(new_vehicles, state.moves + 1))
+           if right_cell < BOARD_SIZE and grid[v.y][right_cell] == '.':
+              new_vehicles = copy_vehicles(state.vehicles)
+              new_vehicles[idx].x += 1
+              possible_moves.append(State(new_vehicles, state.moves + 1))
             # try sliding this vehicle one step to the left
             left_cell = v.x - 1
             if left_cell >= 0 and grid[v.y][left_cell] == '.':
