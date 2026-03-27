@@ -173,4 +173,6 @@ def h2_blocking_plus_distance(state):
  blockers = h1_blocking_count(state)
  distance_left =  (BOARD_SIZE-1) - (red_car.x + red_car.length-1)
  return blockers + distance_left
-
+# TRACE BACK (path reconstruction)
+# After the goal is found, walk backwards through parent
+# pointers to rebuild the full solution path from start to goal.
