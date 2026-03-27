@@ -176,3 +176,12 @@ def h2_blocking_plus_distance(state):
 # TRACE BACK (path reconstruction)
 # After the goal is found, walk backwards through parent
 # pointers to rebuild the full solution path from start to goal.
+def trace_back(parents, id_to_state, goal_state):
+    """Rebuilds the solution path by following parent pointers backwards."""
+    path = []
+    current_id = id(goal_state)
+    while current_id is not None:
+        path.append(id_to_state[current_id])
+        current_id = parents.get(current_id)
+    path.reverse()   # flip so it reads from start to goal
+    return path
