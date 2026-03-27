@@ -153,7 +153,15 @@ def next_states(state):
 #HEURISTIC 1 — Blocking Vehicle Count (H1)
 # Counts how many cars are sitting between the red car and the exit on row 2. 
 # Each one needs at least one move to clear, so this is always a safe lower bound — admissible.
-
+ef h1_blocking_count(state):
+    """H1: counts vehicles directly blocking the red car's path to exit."""
+    grid = make_grid(state)
+    red_car = state.vehicles[0]
+    blockers = 0
+    for col in range(red_car.x + red_car.length, BOARD_SIZE): # scan every column between the red car and the exit
+        if grid[red_car.y][col] != '.':
+            blockers += 1
+    return blockers
 # HEURISTIC 2 — Blocking Count + Distance (H2)
 # H1 plus how many cells the red car still needs to travel.
 # This is a tighter estimate and still never overestimates.
