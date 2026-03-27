@@ -37,15 +37,15 @@ def __init__(self, x, y, Length, orientation, name):
 # A State is one complete snapshot of the board
 # It stores where every vehicle is sitting at that moment
 class State:
-     def __init__(self, vehicles, moves=0):
-         """  vehicles : list of all vehicle object on the board
-                 moves : number of moves taken to reach this state """
-         self.vehicles = vehicles
-         self.moves = moves
-      def__hash__(self):
+    def __init__(self, vehicles, moves=0):
+        """vehicles : list of all vehicle object on the board
+           moves : number of moves taken to reach this state"""
+        self.vehicles = vehicles
+        self.moves = moves
+      def __hash__(self):
          """needed so python can store states in  a set to track visited ones """
          return hash (tuple((v.x,v.y) for v in self.vehicles))
-      def__eq__(self,other):
+      def __eq__(self,other):
          """Two states are the same if every vehicles is at the same position """
          return all(self.vehicles[i].x==other.vehicles[i].x and self.vehicles[i].y==other.vehicles[i].y 
                     for i in range (len(self.vehicles)))
@@ -77,33 +77,31 @@ def copy_vehicles(vehicles):
 # only runs when SHOW_SEARCH =true
 # Display the board as a colour image while the algorithm works.
 def show_board(state):
-   """Shows the current board in a matplotlib window during search."""
-if not SHOW_SEARCH:
-  return
-try:
-  grid=make_grid(state)
-  #convert letters to numbers so matplotlib can colour them
-  # 0=empty (grey), 1=normal car (blue), 2=red car(red)
-  colour_grid = np.zeros((BOARD_SIZE, BOARD_SIZE))
-  for row in range(BOARD_SIZE):
-    for col in range(BOARD_SIZE):
-      if grid[row][col]=='R':
-        colour_grid[row][col] = 2 
-      elif grid[row][col] ! = '.':
-        colour_grid[row][col] = 1
-  plt.imshow(colour_grid, cmap='coolwarm')
-  plt.grid(true)                                
-  for row in range(BOARD_SIZE): # write the vehicle letter inside each occupied cell
-    for col in range(BOARD_SIZE):
-      if grid[row][col] != '.':
-         plt.text(col,row,grid[row][col], ha='center' , va='center')
-  plt.xticks([])
-  plt.yticks([])
-  plt.title(f"moves so far:{state.moves}")
-  plt.pause(0.2)
-  plt.clf()
-except:
-    pass   #skip silently if no display is available
+    """Shows the current board in a matplotlib window during search."""
+    if not SHOW_SEARCH:
+        return
+    try:
+        grid = make_grid(state)
+        colour_grid = np.zeros((BOARD_SIZE, BOARD_SIZE))
+        for row in range(BOARD_SIZE):
+            for col in range(BOARD_SIZE):
+                if grid[row][col] == 'R':
+                    colour_grid[row][col] = 2 
+                elif grid[row][col] != '.':  
+                    colour_grid[row][col] = 1
+        plt.imshow(colour_grid, cmap='coolwarm')
+        plt.grid(True) 
+        for row in range(BOARD_SIZE):
+            for col in range(BOARD_SIZE):
+                if grid[row][col] != '.':
+                    plt.text(col, row, grid[row][col], ha='center', va='center')
+        plt.xticks([])
+        plt.yticks([])
+        plt.title(f"moves so far: {state.moves}")
+        plt.pause(0.2)
+        plt.clf()
+    except:
+        pass   #skip silently if no display is available
 # REACHED EXIT
 # The puzzle is solved when the red car touches the right wall.
 # The exit is at column 5 on row 2.
