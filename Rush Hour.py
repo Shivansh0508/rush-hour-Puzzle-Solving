@@ -27,7 +27,7 @@ def __init__(self, x, y, Length, orientation, name):
         y           : row number, 0 is the top edge
         length      : how many cells it takes up (2 or 3)
         orientation : H means horizontal, V means vertical
-        name        : one letter label, R is always the red car  """
+        name        : one letter label, R is always the red car """
   self.x = x
   self.y = y  
   self.length = length
