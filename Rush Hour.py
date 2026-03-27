@@ -22,17 +22,17 @@ os.makedirs("output" , exist_ok=True)   # create the output folder if it does no
 # VEHICLE CLASS 
 # Stores the position , size , direction , and name of one vehicle
 class Vehicle:
-def __init__(self, x, y, Length, orientation, name):
-  """   x           : column number, 0 is the left edge
+ def __init__(self, x, y, Length, orientation, name):
+   """   x           : column number, 0 is the left edge
         y           : row number, 0 is the top edge
         length      : how many cells it takes up (2 or 3)
         orientation : H means horizontal, V means vertical
-        name        : one letter label, R is always the red car """
-  self.x = x
-  self.y = y  
-  self.length = length
-  self.orientation = orientation
-  self.name = name
+        name        : one letter label, R is always the red car"""
+   self.x = x
+   self.y = y  
+   self.length = length
+   self.orientation = orientation
+   self.name = name
 # STATE CLASS 
 # A State is one complete snapshot of the board
 # It stores where every vehicle is sitting at that moment
