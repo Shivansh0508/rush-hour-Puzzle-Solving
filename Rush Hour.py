@@ -187,9 +187,19 @@ def trace_back(parents, id_to_state, goal_state):
         current_id = parents.get(current_id)
     path.reverse()   # flip so it reads from start to goal
     return path
+# BFS — Breadth First Search
+# Explores all states reachable in 1 move, then 2, then 3...
+# Guaranteed to find the shortest solution.
+# Does not use any heuristic — purely uninformed.
+# Explores many states because it has no guidance.
+def bfs(start):
+    """BFS: explores level by level, guaranteed optimal, no heuristic."""
+    queue   = deque([start])      # states waiting to be explored
+    visited = set([start])        # states already seen
+    parents = {id(start): None}   # tracks how we reached each state
+    states  = {id(start): start}
+    nodes   = 0
 
-
-BFS GOES HERE------NAVYA
 
 IDDFS GOES AFTER -----PANDA
 
