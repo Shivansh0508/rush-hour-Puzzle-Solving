@@ -200,6 +200,12 @@ def bfs(start):
     show_board(current)
     if reached_exit(current):
       print("BFS solved in", current.moves, "moves | states explored:", nodes)
+return current, trace_back(parents, states, current), nodes
+for neighbour in next_states(current):
+  if neghbour not in visited:
+    visited.add(neighbour)
+parents[id(neighbour)] = id(current)
+
 # BFS — Breadth First Search
 # Explores all states reachable in 1 move, then 2, then 3...
 # Guaranteed to find the shortest solution.
