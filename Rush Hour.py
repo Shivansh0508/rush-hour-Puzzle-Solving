@@ -187,3 +187,38 @@ def trace_back(parents, id_to_state, goal_state):
         current_id = parents.get(current_id)
     path.reverse()   # flip so it reads from start to goal
     return path
+
+
+BFS GOES HERE------NAVYA
+
+IDDFS GOES AFTER -----PANDA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# GREEDY SEARCH
+# Always picks the state that looks closest to the goal
+# based on the heuristic. Very fast but NOT guaranteed to
+# find the shortest solution because it ignores move cost.
+# f(n) = h(n) only
+def greedy(start, heuristic):
+  "Greedy: always picks the state with the lowest heuristic value"
+heap = []      # priority queue, lowest h(n) goes first
+visited = set([start])
+parents = {id(start): None}
+states = (id(start): start}
+nodes = 0
+
