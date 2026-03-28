@@ -321,7 +321,7 @@ if reached_exit(current):
   print("A* solved in", current.moves, "moves | states explored:", nodes)
   return current, trace_back(parents, states, current), nodes
 
-for meighbour in next_states(current):
+for neighbour in next_states(current):
   if neighbour not in visited:
     visited.add(neighbour)
     parents[id(neighbour)] = id(current)
