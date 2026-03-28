@@ -317,3 +317,7 @@ while heap:
   nodes += 1
   show_board(current)
   
+if reached_exit(current):
+  print("A* solved in", current.moves, "moves | states explored:", nodes)
+  return current, trace_back(parents, states, current), nodes
+
