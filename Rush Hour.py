@@ -214,22 +214,12 @@ def bfs(start):
                 queue.append(neighbour)
 
     return None, [], nodes
-
-IDDFS GOES AFTER -----PANDA
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# IDDFS — Iterative Deepening Depth First Search
+# Tries depth 0, then depth 1, then depth 2, and so on.
+# At each attempt it does a depth-limited DFS.
+# Uses far less memory than BFS because it only keeps
+# the current path in memory, not the whole frontier.
+# Still finds the optimal solution like BFS.
 
 
 
