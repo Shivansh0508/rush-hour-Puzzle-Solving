@@ -1,7 +1,7 @@
                                                                                 #Rush Hour Puzzle Solver#
                                                                   # Group 15 | CS F401 Artificial intelligence | BITS Pilani 
 #   We solve the Rush Hour puzzle using four search algorithms:
-#   1. BFS    - searches level by level, no hints used
+#   1. BFS    - searches level by level
 #   2. IDDFS  - like BFS but uses much less memory
 #   3. Greedy - uses a smart guess to search faster
 #   4. A*     - combines actual cost + smart guess, best overall
@@ -23,7 +23,7 @@ os.makedirs("output" , exist_ok=True)   # create the output folder if it does no
 # Stores the position , size , direction , and name of one vehicle
 class Vehicle:
  def __init__(self, x, y, Length, orientation, name):
-   """   x           : column number, 0 is the left edge
+   """  x           : column number, 0 is the left edge
         y           : row number, 0 is the top edge
         length      : how many cells it takes up (2 or 3)
         orientation : H means horizontal, V means vertical
@@ -36,22 +36,22 @@ class Vehicle:
 # STATE CLASS 
 # A State is one complete snapshot of the board
 # It stores where every vehicle is sitting at that moment
-class State: 
-  "Represent one board configuration at a specific moment"
-  def __init__(self, vehicles, moves=0):
-    """vehicles : list of all vehicles objects on the board
-    moves : number of moves taken to reach this state
-    """
-    self.vehicles = vehicles
-    self.moves = moves 
-    def __hash__ (self):
-      "Needed so Python can store States in a set to track visited ones"
-      return hash(tuple((v.x, v.y) for v in self.vehicles))
-      def __eq__(self, other):
-        "two states are the same if every vehicle is at the same position"
-        return all(self.vehicle[i].x == other.vehicle[i].x and self.vehicle[i].y == other.vehcile[i].y 
-                   for i in range(len(self.vehicles))
-                  )
+class State:
+    """Represents one board configuration at a specific moment."""
+    def __init__(self, vehicles, moves=0):
+     """vehicles : list of all Vehicle objects on the board
+        moves    : number of moves taken to reach this state"""
+        self.vehicles = vehicles
+        self.moves = moves
+    def __hash__(self):
+        """Needed so Python can store States in a set to track visited ones."""
+        return hash(tuple((v.x, v.y) for v in self.vehicles))
+    def __eq__(self, other):
+        """Two states are the same if every vehicle is at the same position."""
+        return all(
+            self.vehicles[i].x == other.vehicles[i].x and self.vehicles[i].y == other.vehicles[i].y
+            for i in range(len(self.vehicles))
+        )
 # MAKE GRID
 # Converts a State into a simple 2D grid of letters.
 # Empty cells show a dot . Occupied cells show the vehicle name.
