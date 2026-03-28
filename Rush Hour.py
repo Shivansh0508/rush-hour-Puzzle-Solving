@@ -205,6 +205,9 @@ for neighbour in next_states(current):
   if neghbour not in visited:
     visited.add(neighbour)
 parents[id(neighbour)] = id(current)
+states[id(neighbour)] = neighbour
+frontier.append(neighbour)
+return None, [], nodes
 
 # BFS — Breadth First Search
 # Explores all states reachable in 1 move, then 2, then 3...
