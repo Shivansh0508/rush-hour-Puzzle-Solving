@@ -186,6 +186,20 @@ def trace_back(parents, id_to_state, goal_state):
         current_id = parents.get(current_id)
     path.reverse()   # flip so it reads from start to goal
     return path
+
+def bfs(start):
+  # breadth first search- optimal, uninformed
+  frontier = deque([start])
+  visited = set([start])
+  parents = {id(start):None}
+  states = {id(start:start}
+  nodes = 0
+  while frontier:
+    current = frontier.popleft()
+    nodes += 1
+    show_board(current)
+    if reached_exit(current):
+      print("BFS solved in", current.moves, "moves | states explored:", nodes)
 # BFS — Breadth First Search
 # Explores all states reachable in 1 move, then 2, then 3...
 # Guaranteed to find the shortest solution.
