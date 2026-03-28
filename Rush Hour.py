@@ -234,6 +234,19 @@ for neighbour in next_states(state):
 if result:
   return result    # pass the goal back up the call stack
 return None
+
+def iddfs(start, max_depth=50):
+  """IDDFS: repeats DFS with increasing depth limits until goal is found."""
+total_nodes = 0
+for depth in range(max_depth):
+  parents = {id(start): None}
+  states  = {id(start): start}
+  result  = limited_dfs(start, depth, set(), parents, states)
+  total_nodes += depth * 10   # each extra depth re-expands earlier levels
+   if result:
+     print("IDDFS solved at depth", depth, "| states explored:", total_nodes)
+     return result, trace_back(parents, states, result), total_nodes
+return None, [], total_nodes
 # GREEDY SEARCH
 # Always picks the state that looks closest to the goal
 # based on the heuristic. Very fast but NOT guaranteed to
