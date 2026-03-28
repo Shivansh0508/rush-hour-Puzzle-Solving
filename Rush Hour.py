@@ -221,4 +221,18 @@ visited = set([start])
 parents = {id(start): None}
 states = (id(start): start}
 nodes = 0
-
+heapq.heappush(heap, (heuristic(start), next(tie_breaker), start))
+while heap:
+  current = heapq.heapop(heap)
+  nodes +=1
+  show_board(current)
+  if reached_exit(current):
+    print("Greedy solved in", current.moves, "moves | states explored:", nodes)
+    return current, track_back(parents, states, current), nodes
+    for neighbour in next_states(current):
+      if neighbour not in visited:
+        visited.add(neighbour)
+        parents[id(neighbour)] = id(current)
+        states[id(neighbour)] = neighbour
+        heapq.heappush(heap, (heuristic(neighbour), next(tie_breaker), neighbour))
+        return None, [], nodes
