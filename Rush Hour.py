@@ -321,3 +321,13 @@ if reached_exit(current):
   print("A* solved in", current.moves, "moves | states explored:", nodes)
   return current, trace_back(parents, states, current), nodes
 
+for meighbour in next_states(current):
+  if neighbour not in visited:
+    visited.add(neighbour)
+    parents[id(neighbour)] = id(current)
+    states[id(neighbour)] = id(current)
+    states[id(neighbour)] = neighbour
+    f_score = neighbour.moves + heurestic(neighbour)
+    heapq.heappush(heap, (f_score, next(tie_breaker), neighbour))
+
+return None, [], nodes
