@@ -296,3 +296,16 @@ while heap:
         states[id(neighbour)] = neighbour
         heapq.heappush(heap, (heuristic(neighbour), next(tie_breaker), neighbour))
         return None, [], nodes
+
+# A* SEARCH
+# Combines actual move cost g(n) with heurestic estimate h(n).
+#f(n) = g(n) + h(n)
+# Guaranteed to find the shortest solution when the heurestic is admissible. Explores far fewer states than BFS.
+
+def astar(start, heurestic):
+  """A*: picks states with lowest f(n) = g(n) + h(n), optimal and informal."""
+  heap = []             #priority queue, lowest f(n) goes first
+  visited = set([start])
+  parents = {id(start): None}
+  states = {id(start): start}
+  nodes = 0
