@@ -187,6 +187,13 @@ def trace_back(parents, id_to_state, goal_state):
     path.reverse()   # flip so it reads from start to goal
     return path
 
+# BFS - Breadth First Search
+# Explores all states reachable in 1 move, then 2, then 3...
+# Guaranteed to find the shortest solution.
+# Does not use any heurestic - purely uninformed.
+# Explores many states because it has no guidance.
+
+
 def bfs(start):
   # breadth first search- optimal, uninformed
   frontier = deque([start])
