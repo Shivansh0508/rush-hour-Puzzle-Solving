@@ -23,7 +23,7 @@ os.makedirs("output" , exist_ok=True)   # create the output folder if it does no
 # Stores the position , size , direction , and name of one vehicle
 class Vehicle:
  def __init__(self, x, y, Length, orientation, name):
-   """  x           : column number, 0 is the left edge
+     """x           : column number, 0 is the left edge
         y           : row number, 0 is the top edge
         length      : how many cells it takes up (2 or 3)
         orientation : H means horizontal, V means vertical
@@ -234,7 +234,6 @@ for neighbour in next_states(state):
 if result:
   return result    # pass the goal back up the call stack
 return None
-
 def iddfs(start, max_depth=50):
   """IDDFS: repeats DFS with increasing depth limits until goal is found."""
 total_nodes = 0
@@ -261,7 +260,7 @@ states = (id(start): start}
 nodes = 0
 heapq.heappush(heap, (heuristic(start), next(tie_breaker), start))
 while heap:
-  current = heapq.heapop(heap)
+  current = heapq.heappop(heap)
   nodes +=1
   show_board(current)
   if reached_exit(current):
