@@ -50,8 +50,7 @@ class State:
         """Two states are the same if every vehicle is at the same position."""
         return all(
             self.vehicles[i].x == other.vehicles[i].x and self.vehicles[i].y == other.vehicles[i].y
-            for i in range(len(self.vehicles))
-        )
+            for i in range(len(self.vehicles)))
 # MAKE GRID
 # Converts a State into a simple 2D grid of letters.
 # Empty cells show a dot . Occupied cells show the vehicle name.
@@ -212,7 +211,6 @@ def bfs(start):
                 parents[id(neighbour)] = id(current)
                 states[id(neighbour)]  = neighbour
                 queue.append(neighbour)
-
     return None, [], nodes
 # IDDFS — Iterative Deepening Depth First Search
 # Tries depth 0, then depth 1, then depth 2, and so on.
@@ -220,9 +218,22 @@ def bfs(start):
 # Uses far less memory than BFS because it only keeps
 # the current path in memory, not the whole frontier.
 # Still finds the optimal solution like BFS.
-
-
-
+def limited_dfs(state, depth_Left, visited, parents, states):
+  "Helper for IDDFS - Does DFS but stops at the given depth limit"
+show_board(state)
+if reached_exit(state):
+  return state          # found the goal
+if depth_Left == 0:
+  return None           # hit the depth limit, stop here
+visited.add(state)
+for neighbour in next_states(state):
+  if neighbour not in visited:
+    parents[id(neighbour)] = id(state)
+    states[id(neighbour)] = neighbour
+    result = limited_dfs(neighbour, depth_Left - 1, visited, parents, states)
+if result:
+  return result    # pass the goal back up the call stack
+return None
 # GREEDY SEARCH
 # Always picks the state that looks closest to the goal
 # based on the heuristic. Very fast but NOT guaranteed to
