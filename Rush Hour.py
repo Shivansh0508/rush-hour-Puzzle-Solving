@@ -309,3 +309,11 @@ def astar(start, heurestic):
   parents = {id(start): None}
   states = {id(start): start}
   nodes = 0
+
+heapq.heappush(heap, (heurestic(start) + start.moves, next(tie_breaker), start))
+
+while heap:
+  _, _, current = heapq.heappop(heap)
+  nodes += 1
+  show_board(current)
+  
