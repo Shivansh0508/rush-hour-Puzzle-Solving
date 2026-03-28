@@ -199,7 +199,21 @@ def bfs(start):
     parents = {id(start): None}   # tracks how we reached each state
     states  = {id(start): start}
     nodes   = 0
+    while queue:
+      current = queue.popleft()
+      nodes += 1
+      show_board(current)
+      if reached_exit(current)
+      print("BFS solved in", current.moves, "moves | states explored:", nodes)
+      return current, trace_back(parentss, states, current), nodes
+      for neighbour in next_states(current):
+        if neighbour not in visited:
+          visited.add(neighbour)
+                parents[id(neighbour)] = id(current)
+                states[id(neighbour)]  = neighbour
+                queue.append(neighbour)
 
+    return None, [], nodes
 
 IDDFS GOES AFTER -----PANDA
 
