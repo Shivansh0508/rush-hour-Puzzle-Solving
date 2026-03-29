@@ -1,27 +1,79 @@
-[Running] python -u "c:\Users\Shivansh\Desktop\AI Project\RushHour.py"
+========== EASY LEVEL ==========
+
+Running BFS
+BFS solved in 3 moves | states explored: 15
+  Saved : output/EASY_bfs.gif
+
+Running IDDFS
+IDDFS solved at depth 3 | states explored: 60
+  Saved : output/EASY_iddfs.gif
+
+Running Greedy with H1
+Greedy solved in 3 moves | states explored: 11
+  Saved : output/EASY_greedy_h1.gif
+
+Running Greedy with H2
+Greedy solved in 3 moves | states explored: 4
+  Saved : output/EASY_greedy_h2.gif
+
+Running A* with H1
+A* solved in 3 moves | states explored: 15
+  Saved : output/EASY_astar_h1.gif
+
+Running A* with H2
+A* solved in 3 moves | states explored: 4
+  Saved : output/EASY_astar_h2.gif
+
+========== MEDIUM LEVEL ==========
 
 Running BFS
 BFS solved in 6 moves | states explored: 1939
-  Saved : output/bfs_solution.gif
+  Saved : output/MEDIUM_bfs.gif
 
 Running IDDFS
 IDDFS solved at depth 8 | states explored: 360
-  Saved : output/iddfs_solution.gif
+  Saved : output/MEDIUM_iddfs.gif
 
-Running Greedy with H1 (obstruction count)
+Running Greedy with H1
 Greedy solved in 6 moves | states explored: 63
-  Saved : output/greedy_h1_solution.gif
+  Saved : output/MEDIUM_greedy_h1.gif
 
-Running Greedy with H2 (obstruction + distance)
+Running Greedy with H2
 Greedy solved in 6 moves | states explored: 31
-  Saved : output/greedy_h2_solution.gif
+  Saved : output/MEDIUM_greedy_h2.gif
 
-Running A* with H1 (obstruction count)
+Running A* with H1
 A* solved in 6 moves | states explored: 1039
-  Saved : output/astar_h1_solution.gif
+  Saved : output/MEDIUM_astar_h1.gif
 
-Running A* with H2 (obstruction + distance)
+Running A* with H2
 A* solved in 6 moves | states explored: 85
-  Saved : output/astar_h2_solution.gif
+  Saved : output/MEDIUM_astar_h2.gif
 
-[Done] exited with code=0 in 10.29 seconds
+========== HARD LEVEL ==========
+
+Running BFS
+BFS solved in 11 moves | states explored: 3111
+  Saved : output/HARD_bfs.gif
+
+Running IDDFS
+IDDFS solved at depth 15 | states explored: 1200
+  Saved : output/HARD_iddfs.gif
+
+Running Greedy with H1
+Greedy solved in 11 moves | states explored: 50
+  Saved : output/HARD_greedy_h1.gif
+
+Running Greedy with H2
+Greedy solved in 11 moves | states explored: 48
+  Saved : output/HARD_greedy_h2.gif
+
+Running A* with H1
+A* solved in 11 moves | states explored: 2099
+  Saved : output/HARD_astar_h1.gif
+
+Running A* with H2
+A* solved in 11 moves | states explored: 696
+  Saved : output/HARD_astar_h2.gif
+
+[Done] exited with code=0 in 24.925 seconds
