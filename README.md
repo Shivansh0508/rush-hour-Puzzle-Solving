@@ -41,6 +41,16 @@ Admissible-never overestimates the true remaining cost.
 Takes H1 and adds the remaining distance the red car must travel.Tighter estimate,still admissible .
 H2 dominates H1 so A* with H2 explores fewer states .
 
+##  Puzzle Levels
+| Level | Vehicles | Description |
+|-------|----------|-------------|
+| Easy | 4 | Simple board, few blockers |
+| Medium | 9 | L2 complexity, multiple blockers |
+| Hard | 11 | Dense board, increased difficulty |
+
+
+
+
 ## Results
 
 | Algorithm | Heuristic | Moves | States Explored |
