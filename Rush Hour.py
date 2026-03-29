@@ -375,3 +375,14 @@ frames = []  # one image per step of the solution
 #   row 4: G  G  G  .  .  F
 #   row 5: .  .  .  H  H  .
 # The red car R must reach column 5. Optimal solution = 6 moves.
+def setup_puzzle():
+  "Returns the starting board for our L2 Rush Hour puzzle."
+return State([Vehicle(1,2,2,'H','R'), 
+              Vehicle(0,0,2,'H','A'), 
+              Vehicle(0,1,3,'V','B'), 
+              Vehicle(3,0,2,'V','C'), 
+              Vehicle(2,3,2,'H','D'),
+              Vehicle(4,1,3,'V','E'),
+              Vehicle(5,3,2,'V','F'),
+              Vehicle(0,4,3,'H','G'),
+              Vehicle(3,5,2,'H','H'),])
