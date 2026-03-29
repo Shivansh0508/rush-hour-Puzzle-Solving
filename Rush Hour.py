@@ -68,8 +68,7 @@ def make_grid(state):
                   grid[v.y + i][v.x] = v.name   # fill cells going down
      return grid
 # COPY BOARD
-# Makes a fresh copy of the vehicle list so we can modify it
-# without changing the original state. This is important because each successor state must be completely independent.
+# Makes a fresh copy of the vehicle list so we can modify it without changing the original state. This is important because each successor state must be completely independent.
 def copy_vehicles(vehicles):
     """Returns a new list of Vehicle objects with the same values."""
     new_list = []
@@ -77,7 +76,7 @@ def copy_vehicles(vehicles):
         new_list.append(Vehicle(v.x, v.y, v.length, v.orientation, v.name))
     return new_list
 # SHOW BOARD (live window during search)
-# only runs when SHOW_SEARCH =true
+# only runs when SHOW_SEARCH = true
 # Display the board as a colour image while the algorithm works.
 def show_board(state):
     """Shows the current board in a matplotlib window during search."""
@@ -175,8 +174,7 @@ def h2_blocking_plus_distance(state):
     distance_left = (BOARD_SIZE - 1) - (red_car.x + red_car.length - 1)
     return blockers + distance_left
 # TRACE BACK (path reconstruction)
-# After the goal is found, walk backwards through parent
-# pointers to rebuild the full solution path from start to goal.
+# After the goal is found, walk backwards through parent pointers to rebuild the full solution path from start to goal.
 def trace_back(parents, id_to_state, goal_state):
     """Rebuilds the solution path by following parent pointers backwards."""
     path = []
@@ -215,8 +213,7 @@ def bfs(start):
 # IDDFS : Iterative Deepening Depth First Search
 # Tries depth 0, then depth 1, then depth 2, and so on.
 # At each attempt it does a depth-limited DFS.
-# Uses far less memory than BFS because it only keeps
-# the current path in memory, not the whole frontier.
+# Uses far less memory than BFS because it only keeps the current path in memory, not the whole frontier.
 # Still finds the optimal solution like BFS.
 def limited_dfs(state, depth_Left, visited, parents, states):
   "Helper for IDDFS - Does DFS but stops at the given depth limit"
@@ -247,9 +244,7 @@ for depth in range(max_depth):
      return result, trace_back(parents, states, result), total_nodes
 return None, [], total_nodes
 # GREEDY SEARCH
-# Always picks the state that looks closest to the goal
-# based on the heuristic. Very fast but NOT guaranteed to
-# find the shortest solution because it ignores move cost.
+# Always picks the state that looks closest to the goal based on the heuristic. Very fast but NOT guaranteed to find the shortest solution because it ignores move cost.
 # f(n) = h(n) only
 def greedy(start, heuristic):
   "Greedy: always picks the state with the lowest heuristic value"
