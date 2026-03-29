@@ -51,10 +51,10 @@ class State:
         return all(
             self.vehicles[i].x == other.vehicles[i].x and self.vehicles[i].y == other.vehicles[i].y
             for i in range(len(self.vehicles)))
-# MAKE GRID
-# Converts a State into a simple 2D grid of letters.
-# Empty cells show a dot . Occupied cells show the vehicle name.
-# We use this to check if a cell is free before moving a vehicle.
+ # MAKE GRID
+ # Converts a State into a simple 2D grid of letters.
+ # Empty cells show a dot . Occupied cells show the vehicle name.
+ # We use this to check if a cell is free before moving a vehicle.
 def make_grid(state):
     """Builds a 6x6 grid from the current state so we can check empty cells."""
     grid = [['.' for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)] # start with a completely empty board
@@ -278,7 +278,7 @@ while heap:
 # Guaranteed to find the shortest solution when the heurestic is admissible. Explores far fewer states than BFS.
 def astar(start, heurestic):
   """A*: picks states with lowest f(n) = g(n) + h(n), optimal and informal."""
-  heap = []             #priority queue, lowest f(n) goes first
+  heap = []             # priority queue, lowest f(n) goes first
   visited = set([start])
   parents = {id(start): None}
    states = {id(start): start}
@@ -305,3 +305,63 @@ return None, [], nodes
 # as a coloured image with rounded vehicle rectangles.
 # Saves all frames as a looping GIF using a simple for loop.
 # PIL stitches the frames — no animation library needed.
+def save_solution_gif(path, title, save_to):
+  "Saves the solution path as a nicely animated GIF"
+if not path:
+  return
+import io
+from PIL import Image
+import matplotlib.patches as mpatches
+# fixed colour for each vehicle
+vehicle_colours = {'R': '#E74C3C', 'A': '#3498DB', 'B': '#2ECC71', 'C': '#F39C12', 'D': '#9B59B6', 'E': '#1ABC9C', 'F': '#E67E22', 'G': '#34495E', 'H': '#E91E63', }
+frames = []  # one image per step of the solution
+ for step_num, state in enumerate(path):
+        fig, ax = plt.subplots(figsize=(5, 5.5))    # create one figure for this frame
+        ax.set_xlim(0, BOARD_SIZE) 
+        ax.set_ylim(0, BOARD_SIZE)
+        ax.set_aspect('equal')
+        ax.set_facecolor('#F5F5F5')
+        for i in range(BOARD_SIZE + 1):   # draw grid lines
+            ax.axhline(i, color='#CCCCCC', linewidth=0.8)
+            ax.axvline(i, color='#CCCCCC', linewidth=0.8)
+        exit_y = BOARD_SIZE - 2 - 0.5   # draw exit arrow on row 2
+        ax.annotate('', xy=(BOARD_SIZE + 0.45, exit_y),
+                    xytext=(BOARD_SIZE, exit_y),
+                    arrowprops=dict(arrowstyle='->', color='#E74C3C', lw=2.5))
+        ax.text(BOARD_SIZE + 0.5, exit_y, 'EXIT',
+                va='center', fontsize=8, color='#E74C3C', fontweight='bold')
+        for v in state.vehicles:    # draw each vehicle as a coloured rounded rectangle
+            colour = vehicle_colours.get(v.name, '#7F8C8D')
+            flipped_y = BOARD_SIZE - v.y - 1  # our grid has row 0 at the top but matplotlib y=0 is at the bottom so we flip the y before drawing
+            if v.orientation == 'H':
+                box_w, box_h = v.length, 1
+                box_y = flipped_y
+            else:
+                box_w, box_h = 1, v.length
+                box_y = flipped_y - (v.length - 1)
+            # rounded rectangle for the vehicle
+            box = mpatches.FancyBboxPatch((v.x + 0.07, box_y + 0.07),box_w - 0.14, box_h - 0.14, boxstyle='round,pad=0.05', facecolor=colour, edgecolor='white', linewidth=2, zorder=2)
+            ax.add_patch(box)
+          # vehicle letter centred inside the rectangle
+            ax.text(v.x + box_w / 2, box_y + box_h / 2, v.name, ha='center', va='center', fontsize=13, fontweight='bold', color='white', zorder=3)
+        if step_num == 0:            # title shows which step this frame is
+            step_label = "Starting Position"
+        elif step_num == len(path) - 1:
+            step_label = "Goal Reached!"
+        else:
+            step_label = f"Move {step_num} of {len(path) - 1}"
+        ax.set_title(f"{title}  |  {step_label}", fontsize=10, fontweight='bold', color='#2C3E50')
+        ax.set_xticks(np.arange(0.5, BOARD_SIZE))
+        ax.set_xticklabels(range(BOARD_SIZE), fontsize=8)
+        ax.set_yticks(np.arange(0.5, BOARD_SIZE))
+        ax.set_yticklabels(range(BOARD_SIZE - 1, -1, -1), fontsize=8)
+        ax.tick_params(length=0)
+        buf = io.BytesIO()         # save this frame to memory then read it as a PIL Image
+        fig.savefig(buf, format='png', bbox_inches='tight')
+        buf.seek(0)
+        frames.append(Image.open(buf).copy())
+        plt.close(fig)
+    # stitch all frames into one looping GIF
+    frames[0].save(save_to, save_all=True, append_images=frames[1:], duration=900, loop=0)  # milliseconds per frame , 0 = loop forever
+    print(f"  Saved : {save_to}")
+  
