@@ -55,3 +55,11 @@ H2 dominates H1 so A* with H2 explores fewer states .
 **Same moves** = all found the optimal solution. <br>
 **Fewer states** = smarter and more efficient search. <br>
  A* with H2 explores the fewest states overall. <br>
+
+## References
+
+[1] S. Russell and P. Norvig, Artificial Intelligence: A Modern Approach, 3rd ed. Pearson, 2010.
+
+[2] V. Bulitko, Heuristic search for AI pathfinding, University of Alberta, 2011.
+
+[3] R. Korf, Iterative-deepening A*: An optimal admissible tree search,Artificial Intelligence, vol. 27, no. 1, pp. 97-109, 1985.
