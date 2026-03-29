@@ -272,14 +272,14 @@ def greedy(start, heuristic):
 # Combines actual move cost g(n) with heurestic estimate h(n).
 # f(n) = g(n) + h(n)
 # Guaranteed to find the shortest solution when the heurestic is admissible. Explores far fewer states than BFS.
-def astar(start, heurestic):
+def astar(start, heuristic):
     """A*: picks states with lowest f(n) = g(n) + h(n), optimal and informed."""
     heap = []             # priority queue, lowest f(n) goes first
     visited = set([start])
     parents = {id(start): None}
     states = {id(start): start}
     nodes = 0
-    heapq.heappush(heap, (heurestic(start) + start.moves, next(tie_breaker), start))
+    heapq.heappush(heap, (heuristic(start) + start.moves, next(tie_breaker), start))
     while heap:
         _, _, current = heapq.heappop(heap)
         nodes += 1
@@ -292,7 +292,7 @@ def astar(start, heurestic):
                 visited.add(neighbour)
                 parents[id(neighbour)] = id(current)
                 states[id(neighbour)] = neighbour
-                f_score = neighbour.moves + heurestic(neighbour)
+                f_score = neighbour.moves + heuristic(neighbour)
                 heapq.heappush(heap, (f_score, next(tie_breaker), neighbour))
     return None, [], nodes
 # SAVE SOLUTION AS GIF
@@ -381,3 +381,28 @@ def setup_puzzle():
                   Vehicle(3,5,2,'H','H'),])
 # MAIN
 # Runs all six algorithm + heuristic combinations and saves a GIF animation for each one.
+if __name__ == "__main__":
+    if SHOW_SEARCH:
+        plt.ion()
+    board = setup_puzzle()
+    print("\nRunning BFS")        # BFS — no heuristic
+    _, path, _ = bfs(board)
+    save_solution_gif(path, "BFS (no heuristic)", "output/bfs_solution.gif")
+    print("\nRunning IDDFS")      # IDDFS — no heuristic
+    _, path, _ = iddfs(board)
+    save_solution_gif(path, "IDDFS (no heuristic)", "output/iddfs_solution.gif")
+    print("\nRunning Greedy with H1 (obstruction count)")       # Greedy with H1
+    _, path, _ = greedy(board, h1_blocking_count)
+    save_solution_gif(path, "Greedy | H1: blocking count", "output/greedy_h1_solution.gif")
+    print("\nRunning Greedy with H2 (obstruction + distance)")  # Greedy with H2
+    _, path, _ = greedy(board, h2_blocking_plus_distance)
+    save_solution_gif(path, "Greedy | H2: blocking + distance", "output/greedy_h2_solution.gif")
+    print("\nRunning A* with H1 (obstruction count)")            # A* with H1
+    _, path, _ = astar(board, h1_blocking_count)
+    save_solution_gif(path, "A* | H1: blocking count", "output/astar_h1_solution.gif")
+    print("\nRunning A* with H2 (obstruction + distance)")        # A* with H2
+    _, path, _ = astar(board, h2_blocking_plus_distance) 
+    save_solution_gif(path, "A* | H2: blocking + distance", "output/astar_h2_solution.gif")
+    if SHOW_SEARCH:
+        plt.ioff()
+        plt.show()
