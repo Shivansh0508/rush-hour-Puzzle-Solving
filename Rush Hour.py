@@ -1,6 +1,6 @@
                                                                                 #Rush Hour Puzzle Solver#
                                                                   # Group 15 | CS F401 Artificial intelligence | BITS Pilani 
-# L2 level Complexity Implemented
+#   L2 level Complexity Implemented
 #   We solve the Rush Hour puzzle using four search algorithms:
 #   1. BFS    - searches level by level
 #   2. IDDFS  - like BFS but uses much less memory
@@ -386,3 +386,6 @@ return State([Vehicle(1,2,2,'H','R'),
               Vehicle(5,3,2,'V','F'),
               Vehicle(0,4,3,'H','G'),
               Vehicle(3,5,2,'H','H'),])
+# MAIN
+# Runs all six algorithm + heuristic combinations and
+# saves a GIF animation for each one.
