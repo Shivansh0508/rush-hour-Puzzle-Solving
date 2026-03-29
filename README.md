@@ -123,31 +123,6 @@ H2 dominates H1 so A* with H2 explores fewer states .
 | A* H1 | ![](HARD_astar_h1.gif) |
 | A* H2 | ![](HARD_astar_h2.gif) |
 
-##  Project Structure
-```
-rush-hour-Puzzle-Solving/
-├── Rush Hour.py        # Main source code
-├── README.md           # This file
-├── Terminal Output     # Printed results from all runs
-├── EASY_bfs.gif
-├── EASY_iddfs.gif
-├── EASY_greedy_h1.gif
-├── EASY_greedy_h2.gif
-├── EASY_astar_h1.gif
-├── EASY_astar_h2.gif
-├── MEDIUM_bfs.gif
-├── MEDIUM_iddfs.gif
-├── MEDIUM_greedy_h1.gif
-├── MEDIUM_greedy_h2.gif
-├── MEDIUM_astar_h1.gif
-├── MEDIUM_astar_h2.gif
-├── HARD_bfs.gif
-├── HARD_iddfs.gif
-├── HARD_greedy_h1.gif
-├── HARD_greedy_h2.gif
-├── HARD_astar_h1.gif
-└── HARD_astar_h2.gif
-
 
 ## References
 
