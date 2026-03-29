@@ -1,0 +1,27 @@
+[Running] python -u "c:\Users\Shivansh\Desktop\AI Project\RushHour.py"
+
+Running BFS
+BFS solved in 6 moves | states explored: 1939
+  Saved : output/bfs_solution.gif
+
+Running IDDFS
+IDDFS solved at depth 8 | states explored: 360
+  Saved : output/iddfs_solution.gif
+
+Running Greedy with H1 (obstruction count)
+Greedy solved in 6 moves | states explored: 63
+  Saved : output/greedy_h1_solution.gif
+
+Running Greedy with H2 (obstruction + distance)
+Greedy solved in 6 moves | states explored: 31
+  Saved : output/greedy_h2_solution.gif
+
+Running A* with H1 (obstruction count)
+A* solved in 6 moves | states explored: 1039
+  Saved : output/astar_h1_solution.gif
+
+Running A* with H2 (obstruction + distance)
+A* solved in 6 moves | states explored: 85
+  Saved : output/astar_h2_solution.gif
+
+[Done] exited with code=0 in 10.29 seconds
