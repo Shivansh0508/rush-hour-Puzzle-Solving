@@ -24,11 +24,11 @@ os.makedirs("output" , exist_ok=True)   # create the output folder if it does no
 # Stores the position , size , direction , and name of one vehicle
 class Vehicle:
  def init(self, x, y, Length, orientation, name):
-     """x           : column number, 0 is the left edge
+   """  x           : column number, 0 is the left edge
         y           : row number, 0 is the top edge
         length      : how many cells it takes up (2 or 3)
         orientation : H means horizontal, V means vertical
-        name        : one letter label, R is always the red car"""
+        name        : one letter label, R is always the red car  """
    self.x = x
    self.y = y  
    self.length = length
@@ -361,7 +361,7 @@ frames = []  # one image per step of the solution
     print(f"  Saved : {save_to}")
 # PUZZLE SETUP : L2 Medium Difficulty
 # Starting layout:
-#   col:  0  1  2  3  4  5
+#   col:   0  1  2  3  4  5
 #   row 0: A  A  .  C  .  .
 #   row 1: B  .  .  C  E  .
 #   row 2: B  R  R  .  E  .   <= exit is here on the right
