@@ -27,7 +27,6 @@ Always picks the state that looks closest to the goal using the heurestic. Fast 
 
 
 **A*Search**
-
 Combines actual move cost g(n) and heurestic h(n) using
 f(n) = g(n) + h(n)
 Optimal and efficient. 
@@ -87,16 +86,43 @@ H2 dominates H1 so A* with H2 explores fewer states .
 **Fewer states** = smarter and more efficient search. <br>
  A* with H2 explores the fewest states overall. <br>
 
-## Solution Visualizations
+##  Easy Level Solutions
 
 | Algorithm | Solution |
 |-----------|----------|
-| BFS | ![BFS](bfs_solution.gif) |
-| IDDFS | ![IDDFS](iddfs_solution.gif) |
-| Greedy H1 | ![Greedy H1](greedy_h1_solution.gif) |
-| Greedy H2 | ![Greedy H2](greedy_h2_solution.gif) |
-| A* H1 | ![A* H1](astar_h1_solution.gif) |
-| A* H2 | ![A* H2](astar_h2_solution.gif) ||
+| BFS | ![](EASY_bfs.gif) |
+| IDDFS | ![](EASY_iddfs.gif) |
+| Greedy H1 | ![](EASY_greedy_h1.gif) |
+| Greedy H2 | ![](EASY_greedy_h2.gif) |
+| A* H1 | ![](EASY_astar_h1.gif) |
+| A* H2 | ![](EASY_astar_h2.gif) |
+
+---
+
+## Medium Level Solutions
+
+| Algorithm | Solution |
+|-----------|----------|
+| BFS | ![](MEDIUM_bfs.gif) |
+| IDDFS | ![](MEDIUM_iddfs.gif) |
+| Greedy H1 | ![](MEDIUM_greedy_h1.gif) |
+| Greedy H2 | ![](MEDIUM_greedy_h2.gif) |
+| A* H1 | ![](MEDIUM_astar_h1.gif) |
+| A* H2 | ![](MEDIUM_astar_h2.gif) |
+
+---
+
+##  Hard Level Solutions
+
+| Algorithm | Solution |
+|-----------|----------|
+| BFS | ![](HARD_bfs.gif) |
+| IDDFS | ![](HARD_iddfs.gif) |
+| Greedy H1 | ![](HARD_greedy_h1.gif) |
+| Greedy H2 | ![](HARD_greedy_h2.gif) |
+| A* H1 | ![](HARD_astar_h1.gif) |
+| A* H2 | ![](HARD_astar_h2.gif) |
+
 
 ## References
 
