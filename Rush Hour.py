@@ -406,11 +406,7 @@ def setup_hard():
 if __name__ == "__main__":
     if SHOW_SEARCH:
         plt.ion()
-    levels = {
-        "EASY": setup_easy,
-        "MEDIUM": setup_medium,
-        "HARD": setup_hard
-    }
+    levels = {"EASY": setup_easy, "MEDIUM": setup_medium, "HARD": setup_hard}
     for level_name, setup_func in levels.items():
         print(f"\n========== {level_name} LEVEL ==========")
         board = setup_func()             
