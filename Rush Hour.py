@@ -1,4 +1,4 @@
-                                                                                #Rush Hour Puzzle Solver#
+                                                                                # Rush Hour Puzzle Solver
                                                                   # Group 15 | CS F401 Artificial intelligence | BITS Pilani 
 #   L2 level Complexity Implemented
 #   We solve the Rush Hour puzzle using four search algorithms:
@@ -23,7 +23,7 @@ os.makedirs("output" , exist_ok=True)   # create the output folder if it does no
 # VEHICLE CLASS 
 # Stores the position , size , direction , and name of one vehicle
 class Vehicle:
- def __init__(self, x, y, Length, orientation, name):
+ def init(self, x, y, Length, orientation, name):
      """x           : column number, 0 is the left edge
         y           : row number, 0 is the top edge
         length      : how many cells it takes up (2 or 3)
@@ -39,15 +39,15 @@ class Vehicle:
 # It stores where every vehicle is sitting at that moment
 class State:
     """Represents one board configuration at a specific moment."""
-    def __init__(self, vehicles, moves=0):
+    def init(self, vehicles, moves=0):
      """vehicles : list of all Vehicle objects on the board
         moves    : number of moves taken to reach this state"""
         self.vehicles = vehicles
         self.moves = moves
-    def __hash__(self):
+    def hash(self):
         """Needed so Python can store States in a set to track visited ones."""
         return hash(tuple((v.x, v.y) for v in self.vehicles))
-    def __eq__(self, other):
+    def eq(self, other):
         """Two states are the same if every vehicle is at the same position."""
         return all(
             self.vehicles[i].x == other.vehicles[i].x and self.vehicles[i].y == other.vehicles[i].y
@@ -151,7 +151,7 @@ def next_states(state):
                 new_vehicles[idx].y -= 1
                 possible_moves.append(State(new_vehicles, state.moves + 1))
     return possible_moves
-#HEURISTIC 1 — Blocking Vehicle Count (H1)
+# HEURISTIC 1 : Blocking Vehicle Count (H1)
 # Counts how many cars are sitting between the red car and the exit on row 2. 
 # Each one needs at least one move to clear, so this is always a safe lower bound — admissible.
 def h1_blocking_count(state):
@@ -163,7 +163,7 @@ def h1_blocking_count(state):
         if grid[red_car.y][col] != '.':
             blockers += 1
     return blockers
-# HEURISTIC 2 — Blocking Count + Distance (H2)
+# HEURISTIC 2 : Blocking Count + Distance (H2)
 # H1 plus how many cells the red car still needs to travel.
 # This is a tighter estimate and still never overestimates.
 # H2 is a always >= H1 so it is said to dominate H1.
@@ -186,7 +186,7 @@ def trace_back(parents, id_to_state, goal_state):
         current_id = parents.get(current_id)
     path.reverse()   # flip so it reads from start to goal
     return path
-# BFS — Breadth First Search
+# BFS : Breadth First Search
 # Explores all states reachable in 1 move, then 2, then 3...
 # Guaranteed to find the shortest solution.
 # Does not use any heuristic — purely uninformed.
@@ -212,7 +212,7 @@ def bfs(start):
                 states[id(neighbour)]  = neighbour
                 queue.append(neighbour)
     return None, [], nodes
-# IDDFS — Iterative Deepening Depth First Search
+# IDDFS : Iterative Deepening Depth First Search
 # Tries depth 0, then depth 1, then depth 2, and so on.
 # At each attempt it does a depth-limited DFS.
 # Uses far less memory than BFS because it only keeps
@@ -261,7 +261,7 @@ nodes = 0
 heapq.heappush(heap, (heuristic(start), next(tie_breaker), start))
 while heap:
   current = heapq.heappop(heap)
-  nodes +=1
+  nodes += 1
   show_board(current)
   if reached_exit(current):
     print("Greedy solved in", current.moves, "moves | states explored:", nodes)
@@ -275,7 +275,7 @@ while heap:
         return None, [], nodes
 # A* SEARCH
 # Combines actual move cost g(n) with heurestic estimate h(n).
-#f(n) = g(n) + h(n)
+# f(n) = g(n) + h(n)
 # Guaranteed to find the shortest solution when the heurestic is admissible. Explores far fewer states than BFS.
 def astar(start, heurestic):
   """A*: picks states with lowest f(n) = g(n) + h(n), optimal and informal."""
@@ -302,8 +302,7 @@ for neighbour in next_states(current):
     heapq.heappush(heap, (f_score, next(tie_breaker), neighbour))
 return None, [], nodes
 # SAVE SOLUTION AS GIF
-# Goes through each step in the solution and draws the board
-# as a coloured image with rounded vehicle rectangles.
+# Goes through each step in the solution and draws the board as a coloured image with rounded vehicle rectangles.
 # Saves all frames as a looping GIF using a simple for loop.
 # PIL stitches the frames — no animation library needed.
 def save_solution_gif(path, title, save_to):
@@ -343,7 +342,7 @@ frames = []  # one image per step of the solution
             # rounded rectangle for the vehicle
             box = mpatches.FancyBboxPatch((v.x + 0.07, box_y + 0.07),box_w - 0.14, box_h - 0.14, boxstyle='round,pad=0.05', facecolor=colour, edgecolor='white', linewidth=2, zorder=2)
             ax.add_patch(box)
-          # vehicle letter centred inside the rectangle
+            # vehicle letter centred inside the rectangle
             ax.text(v.x + box_w / 2, box_y + box_h / 2, v.name, ha='center', va='center', fontsize=13, fontweight='bold', color='white', zorder=3)
         if step_num == 0:            # title shows which step this frame is
             step_label = "Starting Position"
@@ -365,7 +364,7 @@ frames = []  # one image per step of the solution
     # stitch all frames into one looping GIF
     frames[0].save(save_to, save_all=True, append_images=frames[1:], duration=900, loop=0)  # milliseconds per frame , 0 = loop forever
     print(f"  Saved : {save_to}")
-# PUZZLE SETUP — L2 Medium Difficulty
+# PUZZLE SETUP : L2 Medium Difficulty
 # Starting layout:
 #   col:  0  1  2  3  4  5
 #   row 0: A  A  .  C  .  .
@@ -387,5 +386,4 @@ return State([Vehicle(1,2,2,'H','R'),
               Vehicle(0,4,3,'H','G'),
               Vehicle(3,5,2,'H','H'),])
 # MAIN
-# Runs all six algorithm + heuristic combinations and
-# saves a GIF animation for each one.
+# Runs all six algorithm + heuristic combinations and saves a GIF animation for each one.
