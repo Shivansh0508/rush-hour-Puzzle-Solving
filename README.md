@@ -51,16 +51,37 @@ H2 dominates H1 so A* with H2 explores fewer states .
 
 
 
-## Results
+##  Results
 
+### Easy Level
 | Algorithm | Heuristic | Moves | States Explored |
 |-----------|-----------|-------|-----------------|
-| BFS       | None      | 6     | 1939            |
-| IDDFS     | None      | 8     | 360             |
-| Greedy    | H1        | 6     | 63              |
-| Greedy    | H2        | 6     | 31              |
-| A*        | H1        | 6     | 1039            |
-| A*        | H2        | 6     | 85              |
+| BFS | None | 3 | 15 |
+| IDDFS | None | 3 | 60 |
+| Greedy | H1 | 3 | 11 |
+| Greedy | H2 | 3 | 4 |
+| A* | H1 | 3 | 15 |
+| A* | H2 | 3 | 4 |
+
+### Medium Level
+| Algorithm | Heuristic | Moves | States Explored |
+|-----------|-----------|-------|-----------------|
+| BFS | None | 6 | 1939 |
+| IDDFS | None | 8 | 360 |
+| Greedy | H1 | 6 | 63 |
+| Greedy | H2 | 6 | 31 |
+| A* | H1 | 6 | 1039 |
+| A* | H2 | 6 | 85 |
+
+### Hard Level
+| Algorithm | Heuristic | Moves | States Explored |
+|-----------|-----------|-------|-----------------|
+| BFS | None | 11 | 3111 |
+| IDDFS | None | 15 | 1200 |
+| Greedy | H1 | 11 | 50 |
+| Greedy | H2 | 11 | 48 |
+| A* | H1 | 11 | 2099 |
+| A* | H2 | 11 | 696 |
 
 **Same moves** = all found the optimal solution. <br>
 **Fewer states** = smarter and more efficient search. <br>
