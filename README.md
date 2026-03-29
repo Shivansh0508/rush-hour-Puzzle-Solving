@@ -60,12 +60,12 @@ H2 dominates H1 so A* with H2 explores fewer states .
 
 | Algorithm | Solution |
 |-----------|----------|
-| BFS | ![BFS](output/bfs_solution.gif) |
-| IDDFS | ![IDDFS](output/iddfs_solution.gif) |
-| Greedy H1 | ![Greedy H1](output/greedy_h1_solution.gif) |
-| Greedy H2 | ![Greedy H2](output/greedy_h2_solution.gif) |
-| A* H1 | ![A* H1](output/astar_h1_solution.gif) |
-| A* H2 | ![A* H2](output/astar_h2_solution.gif) |
+| BFS | ![BFS](bfs_solution.gif) |
+| IDDFS | ![IDDFS](iddfs_solution.gif) |
+| Greedy H1 | ![Greedy H1](greedy_h1_solution.gif) |
+| Greedy H2 | ![Greedy H2](greedy_h2_solution.gif) |
+| A* H1 | ![A* H1](astar_h1_solution.gif) |
+| A* H2 | ![A* H2](astar_h2_solution.gif) ||
 
 ## References
 
