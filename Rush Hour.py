@@ -1,4 +1,4 @@
-                                                                                # Rush Hour Puzzle Solver
+                                                                               # Rush Hour Puzzle Solver
                                                                   # Group 15 | CS F401 Artificial intelligence | BITS Pilani 
 #   L2 level Complexity Implemented
 #   We solve the Rush Hour puzzle using four search algorithms:
@@ -368,41 +368,70 @@ def save_solution_gif(path, title, save_to):
 #   row 4: G  G  G  .  .  F
 #   row 5: .  .  .  H  H  .
 # The red car R must reach column 5. Optimal solution = 6 moves.
-def setup_puzzle():
+def setup_easy():
     "Returns the starting board for our L2 Rush Hour puzzle."
-    return State([Vehicle(1,2,2,'H','R'), 
-                  Vehicle(0,0,2,'H','A'), 
-                  Vehicle(0,1,3,'V','B'), 
-                  Vehicle(3,0,2,'V','C'), 
-                  Vehicle(2,3,2,'H','D'),
-                  Vehicle(4,1,3,'V','E'),
-                  Vehicle(5,3,2,'V','F'),
-                  Vehicle(0,4,3,'H','G'),
-                  Vehicle(3,5,2,'H','H'),])
+    return State([
+        Vehicle(1,2,2,'H','R'),
+        Vehicle(0,0,2,'H','A'),
+        Vehicle(0,1,2,'V','B'),
+        Vehicle(3,0,2,'V','C'),])
+def setup_medium():
+    "Returns the starting board for our L2 Rush Hour puzzle."
+    return State([
+        Vehicle(1,2,2,'H','R'), 
+        Vehicle(0,0,2,'H','A'), 
+        Vehicle(0,1,3,'V','B'), 
+        Vehicle(3,0,2,'V','C'), 
+        Vehicle(2,3,2,'H','D'),
+        Vehicle(4,1,3,'V','E'),
+        Vehicle(5,3,2,'V','F'),
+        Vehicle(0,4,3,'H','G'),
+        Vehicle(3,5,2,'H','H'),])
+def setup_hard():
+    "Returns the starting board for our L2 Rush Hour puzzle."
+    return State([
+        Vehicle(1,2,2,'H','R'),
+        Vehicle(0,0,2,'H','A'),
+        Vehicle(0,1,3,'V','B'),
+        Vehicle(3,0,3,'V','C'),
+        Vehicle(2,3,2,'H','D'),
+        Vehicle(4,1,3,'V','E'),
+        Vehicle(5,3,3,'V','F'),
+        Vehicle(0,4,3,'H','G'),
+        Vehicle(3,5,2,'H','H'),
+        Vehicle(2,0,2,'V','I'),
+        Vehicle(1,4,2,'H','J'),]) 
 # MAIN
 # Runs all six algorithm + heuristic combinations and saves a GIF animation for each one.
 if __name__ == "__main__":
     if SHOW_SEARCH:
         plt.ion()
-    board = setup_puzzle()
-    print("\nRunning BFS")        # BFS — no heuristic
-    _, path, _ = bfs(board)
-    save_solution_gif(path, "BFS (no heuristic)", "output/bfs_solution.gif")
-    print("\nRunning IDDFS")      # IDDFS — no heuristic
-    _, path, _ = iddfs(board)
-    save_solution_gif(path, "IDDFS (no heuristic)", "output/iddfs_solution.gif")
-    print("\nRunning Greedy with H1 (obstruction count)")       # Greedy with H1
-    _, path, _ = greedy(board, h1_blocking_count)
-    save_solution_gif(path, "Greedy | H1: blocking count", "output/greedy_h1_solution.gif")
-    print("\nRunning Greedy with H2 (obstruction + distance)")  # Greedy with H2
-    _, path, _ = greedy(board, h2_blocking_plus_distance)
-    save_solution_gif(path, "Greedy | H2: blocking + distance", "output/greedy_h2_solution.gif")
-    print("\nRunning A* with H1 (obstruction count)")            # A* with H1
-    _, path, _ = astar(board, h1_blocking_count)
-    save_solution_gif(path, "A* | H1: blocking count", "output/astar_h1_solution.gif")
-    print("\nRunning A* with H2 (obstruction + distance)")        # A* with H2
-    _, path, _ = astar(board, h2_blocking_plus_distance) 
-    save_solution_gif(path, "A* | H2: blocking + distance", "output/astar_h2_solution.gif")
+    levels = {
+        "EASY": setup_easy,
+        "MEDIUM": setup_medium,
+        "HARD": setup_hard
+    }
+    for level_name, setup_func in levels.items():
+        print(f"\n========== {level_name} LEVEL ==========")
+        board = setup_func()             
+        print("\nRunning BFS")            # BFS
+        _, path, _ = bfs(board)
+        save_solution_gif(path, f"{level_name} BFS", f"output/{level_name}_bfs.gif")
+        print("\nRunning IDDFS")          # IDDFS
+        _, path, _ = iddfs(board)
+        save_solution_gif(path, f"{level_name} IDDFS", f"output/{level_name}_iddfs.gif")
+        print("\nRunning Greedy with H1") # Greedy H1
+        _, path, _ = greedy(board, h1_blocking_count)
+        save_solution_gif(path, f"{level_name} Greedy H1", f"output/{level_name}_greedy_h1.gif")
+        print("\nRunning Greedy with H2")  # Greedy H2
+        _, path, _ = greedy(board, h2_blocking_plus_distance)
+        save_solution_gif(path, f"{level_name} Greedy H2", f"output/{level_name}_greedy_h2.gif")
+        print("\nRunning A* with H1")      # A* H1
+        _, path, _ = astar(board, h1_blocking_count)
+        save_solution_gif(path, f"{level_name} A* H1", f"output/{level_name}_astar_h1.gif")
+        print("\nRunning A* with H2")      # A* H2
+        _, path, _ = astar(board, h2_blocking_plus_distance)
+        save_solution_gif(path, f"{level_name} A* H2", f"output/{level_name}_astar_h2.gif")
     if SHOW_SEARCH:
         plt.ioff()
         plt.show()
