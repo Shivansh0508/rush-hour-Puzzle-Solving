@@ -56,6 +56,9 @@ H2 dominates H1 so A* with H2 explores fewer states .
 **Fewer states** = smarter and more efficient search. <br>
  A* with H2 explores the fewest states overall. <br>
 
+
+![bfs_solution](https://github.com/user-attachments/assets/76e3a91e-fec1-41e0-9178-25600cbba593)
+
 ## References
 
 [1] S. Russell and P. Norvig, Artificial Intelligence: A Modern Approach, 3rd ed. Pearson, 2010.
