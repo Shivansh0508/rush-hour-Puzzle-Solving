@@ -149,7 +149,6 @@ def next_states(state):
                 new_vehicles = copy_vehicles(state.vehicles)
                 new_vehicles[idx].y -= 1
                 possible_moves.append(State(new_vehicles, state.moves + 1))
-
     return possible_moves
 #HEURISTIC 1 — Blocking Vehicle Count (H1)
 # Counts how many cars are sitting between the red car and the exit on row 2. 
@@ -186,36 +185,6 @@ def trace_back(parents, id_to_state, goal_state):
         current_id = parents.get(current_id)
     path.reverse()   # flip so it reads from start to goal
     return path
-
-# BFS - Breadth First Search
-# Explores all states reachable in 1 move, then 2, then 3...
-# Guaranteed to find the shortest solution.
-# Does not use any heurestic - purely uninformed.
-# Explores many states because it has no guidance.
-
-
-def bfs(start):
-  # breadth first search- optimal, uninformed
-  frontier = deque([start])
-  visited = set([start])
-  parents = {id(start):None}
-  states = {id(start:start}
-  nodes = 0
-  while frontier:
-    current = frontier.popleft()
-    nodes += 1
-    show_board(current)
-    if reached_exit(current):
-      print("BFS solved in", current.moves, "moves | states explored:", nodes)
-return current, trace_back(parents, states, current), nodes
-for neighbour in next_states(current):
-  if neghbour not in visited:
-    visited.add(neighbour)
-parents[id(neighbour)] = id(current)
-states[id(neighbour)] = neighbour
-frontier.append(neighbour)
-return None, [], nodes
-
 # BFS — Breadth First Search
 # Explores all states reachable in 1 move, then 2, then 3...
 # Guaranteed to find the shortest solution.
@@ -303,31 +272,25 @@ while heap:
         states[id(neighbour)] = neighbour
         heapq.heappush(heap, (heuristic(neighbour), next(tie_breaker), neighbour))
         return None, [], nodes
-
 # A* SEARCH
 # Combines actual move cost g(n) with heurestic estimate h(n).
 #f(n) = g(n) + h(n)
 # Guaranteed to find the shortest solution when the heurestic is admissible. Explores far fewer states than BFS.
-
 def astar(start, heurestic):
   """A*: picks states with lowest f(n) = g(n) + h(n), optimal and informal."""
   heap = []             #priority queue, lowest f(n) goes first
   visited = set([start])
   parents = {id(start): None}
-  states = {id(start): start}
-  nodes = 0
-
+   states = {id(start): start}
+    nodes = 0
 heapq.heappush(heap, (heurestic(start) + start.moves, next(tie_breaker), start))
-
 while heap:
-  _, _, current = heapq.heappop(heap)
+   current = heapq.heappop(heap)
   nodes += 1
   show_board(current)
-  
 if reached_exit(current):
   print("A* solved in", current.moves, "moves | states explored:", nodes)
   return current, trace_back(parents, states, current), nodes
-
 for neighbour in next_states(current):
   if neighbour not in visited:
     visited.add(neighbour)
@@ -336,5 +299,4 @@ for neighbour in next_states(current):
     states[id(neighbour)] = neighbour
     f_score = neighbour.moves + heurestic(neighbour)
     heapq.heappush(heap, (f_score, next(tie_breaker), neighbour))
-
 return None, [], nodes
