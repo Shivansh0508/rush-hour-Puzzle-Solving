@@ -40,3 +40,14 @@ Admissible-never overestimates the true remaining cost.
 **H2-Blocking Count + Distance**
 Takes H1 and adds the remaining distance the red car must travel.Tighter estimate,still admissible .
 H2 dominates H1 so A* with H2 explores fewer states .
+
+## Results
+
+| Algorithm | Heuristic | Moves | States Explored |
+|-----------|-----------|-------|-----------------|
+| BFS       | None      | 6     | 1939            |
+| IDDFS     | None      | 8     | 360             |
+| Greedy    | H1        | 6     | 63              |
+| Greedy    | H2        | 6     | 31              |
+| A*        | H1        | 6     | 1039            |
+| A*        | H2        | 6     | 85              |
