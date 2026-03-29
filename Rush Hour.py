@@ -23,25 +23,25 @@ os.makedirs("output" , exist_ok=True)   # create the output folder if it does no
 # VEHICLE CLASS 
 # Stores the position , size , direction , and name of one vehicle
 class Vehicle:
- def __init__(self, x, y, length, orientation, name):
-   """  x           : column number, 0 is the left edge
-        y           : row number, 0 is the top edge
-        length      : how many cells it takes up (2 or 3)
-        orientation : H means horizontal, V means vertical
-        name        : one letter label, R is always the red car  """
-   self.x = x
-   self.y = y  
-   self.length = length
-   self.orientation = orientation
-   self.name = name
+    def __init__(self, x, y, length, orientation, name):
+        """  x           : column number, 0 is the left edge
+             y           : row number, 0 is the top edge
+             length      : how many cells it takes up (2 or 3)
+             orientation : H means horizontal, V means vertical
+             name        : one letter label, R is always the red car  """
+        self.x = x
+        self.y = y  
+        self.length = length
+        self.orientation = orientation
+        self.name = name
 # STATE CLASS 
 # A State is one complete snapshot of the board
 # It stores where every vehicle is sitting at that moment
 class State:
     """Represents one board configuration at a specific moment."""
     def __init__(self, vehicles, moves=0):
-     """vehicles : list of all Vehicle objects on the board
-        moves    : number of moves taken to reach this state"""
+        """vehicles : list of all Vehicle objects on the board
+           moves    : number of moves taken to reach this state"""
         self.vehicles = vehicles
         self.moves = moves
     def __hash__(self):
@@ -52,21 +52,21 @@ class State:
         return all(
             self.vehicles[i].x == other.vehicles[i].x and self.vehicles[i].y == other.vehicles[i].y
             for i in range(len(self.vehicles)))
- # MAKE GRID
- # Converts a State into a simple 2D grid of letters.
- # Empty cells show a dot . Occupied cells show the vehicle name.
- # We use this to check if a cell is free before moving a vehicle.
+# MAKE GRID
+# Converts a State into a simple 2D grid of letters.
+# Empty cells show a dot . Occupied cells show the vehicle name.
+# We use this to check if a cell is free before moving a vehicle.
 def make_grid(state):
     """Builds a 6x6 grid from the current state so we can check empty cells."""
     grid = [['.' for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)] # start with a completely empty board
     for v in state.vehicles:        # place each vehicle onto the grid
         if v.orientation == 'H':
-           for i in range(v.length):
-               grid[v.y][v.x + i] = v.name      # fill cells going right
+            for i in range(v.length):
+                grid[v.y][v.x + i] = v.name      # fill cells going right
         else:
-              for i in range(v.length):
-                  grid[v.y + i][v.x] = v.name   # fill cells going down
-     return grid
+            for i in range(v.length):
+                grid[v.y + i][v.x] = v.name   # fill cells going down
+    return grid
 # COPY BOARD
 # Makes a fresh copy of the vehicle list so we can modify it without changing the original state. This is important because each successor state must be completely independent.
 def copy_vehicles(vehicles):
@@ -126,17 +126,17 @@ def next_states(state):
         if v.orientation == 'H':
             # try sliding this vehicle one step to the right
             right_cell = v.x + v.length
-           if right_cell < BOARD_SIZE and grid[v.y][right_cell] == '.':
-              new_vehicles = copy_vehicles(state.vehicles)
-              new_vehicles[idx].x += 1
-              possible_moves.append(State(new_vehicles, state.moves + 1))
+            if right_cell < BOARD_SIZE and grid[v.y][right_cell] == '.':
+                new_vehicles = copy_vehicles(state.vehicles)
+                new_vehicles[idx].x += 1
+                possible_moves.append(State(new_vehicles, state.moves + 1))
             # try sliding this vehicle one step to the left
             left_cell = v.x - 1
             if left_cell >= 0 and grid[v.y][left_cell] == '.':
                 new_vehicles = copy_vehicles(state.vehicles)
                 new_vehicles[idx].x -= 1
                 possible_moves.append(State(new_vehicles, state.moves + 1))
-       else:
+        else:
             # try sliding this vehicle one step downward
             one_down = v.y + v.length
             if one_down < BOARD_SIZE and grid[one_down][v.x] == '.':
@@ -197,15 +197,15 @@ def bfs(start):
     states  = {id(start): start}
     nodes   = 0
     while queue:
-      current = queue.popleft()
-      nodes += 1
-      show_board(current)
-      if reached_exit(current):
-      print("BFS solved in", current.moves, "moves | states explored:", nodes)
-      return current, trace_back(parents, states, current), nodes
-      for neighbour in next_states(current):
-        if neighbour not in visited:
-          visited.add(neighbour)
+        current = queue.popleft()
+        nodes += 1
+        show_board(current)
+        if reached_exit(current):
+            print("BFS solved in", current.moves, "moves | states explored:", nodes)
+            return current, trace_back(parents, states, current), nodes
+        for neighbour in next_states(current):
+            if neighbour not in visited:
+                visited.add(neighbour)
                 parents[id(neighbour)] = id(current)
                 states[id(neighbour)]  = neighbour
                 queue.append(neighbour)
@@ -216,100 +216,100 @@ def bfs(start):
 # Uses far less memory than BFS because it only keeps the current path in memory, not the whole frontier.
 # Still finds the optimal solution like BFS.
 def limited_dfs(state, depth_Left, visited, parents, states):
-  "Helper for IDDFS - Does DFS but stops at the given depth limit"
-show_board(state)
-if reached_exit(state):
-  return state          # found the goal
-if depth_Left == 0:
-  return None           # hit the depth limit, stop here
-visited.add(state)
-for neighbour in next_states(state):
-  if neighbour not in visited:
-    parents[id(neighbour)] = id(state)
-    states[id(neighbour)] = neighbour
-    result = limited_dfs(neighbour, depth_Left - 1, visited, parents, states)
-if result:
-  return result    # pass the goal back up the call stack
-return None
+    "Helper for IDDFS - Does DFS but stops at the given depth limit"
+    show_board(state)
+    if reached_exit(state):
+        return state          # found the goal
+    if depth_Left == 0:
+        return None           # hit the depth limit, stop here
+    visited.add(state)
+    for neighbour in next_states(state):
+        if neighbour not in visited:
+            parents[id(neighbour)] = id(state)
+            states[id(neighbour)] = neighbour
+            result = limited_dfs(neighbour, depth_Left - 1, visited, parents, states)
+            if result:
+                return result    # pass the goal back up the call stack
+    return None
 def iddfs(start, max_depth=50):
-  """IDDFS: repeats DFS with increasing depth limits until goal is found."""
-total_nodes = 0
-for depth in range(max_depth):
-  parents = {id(start): None}
-  states  = {id(start): start}
-  result  = limited_dfs(start, depth, set(), parents, states)
-  total_nodes += depth * 10   # each extra depth re-expands earlier levels
-   if result:
-     print("IDDFS solved at depth", depth, "| states explored:", total_nodes)
-     return result, trace_back(parents, states, result), total_nodes
-return None, [], total_nodes
+    """IDDFS: repeats DFS with increasing depth limits until goal is found."""
+    total_nodes = 0
+    for depth in range(max_depth):
+        parents = {id(start): None}
+        states  = {id(start): start}
+        result  = limited_dfs(start, depth, set(), parents, states)
+        total_nodes += depth * 10   # each extra depth re-expands earlier levels
+        if result:
+            print("IDDFS solved at depth", depth, "| states explored:", total_nodes)
+            return result, trace_back(parents, states, result), total_nodes
+    return None, [], total_nodes
 # GREEDY SEARCH
 # Always picks the state that looks closest to the goal based on the heuristic. Very fast but NOT guaranteed to find the shortest solution because it ignores move cost.
 # f(n) = h(n) only
 def greedy(start, heuristic):
-  "Greedy: always picks the state with the lowest heuristic value"
-heap = []      # priority queue, lowest h(n) goes first
-visited = set([start])
-parents = {id(start): None}
-states = {id(start): start}
-nodes = 0
-heapq.heappush(heap, (heuristic(start), next(tie_breaker), start))
-while heap:
-  _,_, current = heapq.heappop(heap)
-  nodes += 1
-  show_board(current)
-  if reached_exit(current):
-    print("Greedy solved in", current.moves, "moves | states explored:", nodes)
-    return current, trace_back(parents, states, current), nodes
-    for neighbour in next_states(current):
-      if neighbour not in visited:
-        visited.add(neighbour)
-        parents[id(neighbour)] = id(current)
-        states[id(neighbour)] = neighbour
-        heapq.heappush(heap, (heuristic(neighbour), next(tie_breaker), neighbour))
- return None, [], nodes
+    "Greedy: always picks the state with the lowest heuristic value"
+    heap = []      # priority queue, lowest h(n) goes first
+    visited = set([start])
+    parents = {id(start): None}
+    states = {id(start): start}
+    nodes = 0
+    heapq.heappush(heap, (heuristic(start), next(tie_breaker), start))
+    while heap:
+        _,_, current = heapq.heappop(heap)
+        nodes += 1
+        show_board(current)
+        if reached_exit(current):
+            print("Greedy solved in", current.moves, "moves | states explored:", nodes)
+            return current, trace_back(parents, states, current), nodes
+        for neighbour in next_states(current):
+            if neighbour not in visited:
+                visited.add(neighbour)
+                parents[id(neighbour)] = id(current)
+                states[id(neighbour)] = neighbour
+                heapq.heappush(heap, (heuristic(neighbour), next(tie_breaker), neighbour))
+    return None, [], nodes
 # A* SEARCH
 # Combines actual move cost g(n) with heurestic estimate h(n).
 # f(n) = g(n) + h(n)
 # Guaranteed to find the shortest solution when the heurestic is admissible. Explores far fewer states than BFS.
 def astar(start, heurestic):
-  """A*: picks states with lowest f(n) = g(n) + h(n), optimal and informed."""
-  heap = []             # priority queue, lowest f(n) goes first
-  visited = set([start])
-  parents = {id(start): None}
-  states = {id(start): start}
-  nodes = 0
-heapq.heappush(heap, (heurestic(start) + start.moves, next(tie_breaker), start))
-while heap:
-  _, _, current = heapq.heappop(heap)
-  nodes += 1
-  show_board(current)
-if reached_exit(current):
-  print("A* solved in", current.moves, "moves | states explored:", nodes)
-  return current, trace_back(parents, states, current), nodes
-for neighbour in next_states(current):
-  if neighbour not in visited:
-    visited.add(neighbour)
-    parents[id(neighbour)] = id(current)
-    states[id(neighbour)] = neighbour
-    f_score = neighbour.moves + heurestic(neighbour)
-    heapq.heappush(heap, (f_score, next(tie_breaker), neighbour))
-return None, [], nodes
+    """A*: picks states with lowest f(n) = g(n) + h(n), optimal and informed."""
+    heap = []             # priority queue, lowest f(n) goes first
+    visited = set([start])
+    parents = {id(start): None}
+    states = {id(start): start}
+    nodes = 0
+    heapq.heappush(heap, (heurestic(start) + start.moves, next(tie_breaker), start))
+    while heap:
+        _, _, current = heapq.heappop(heap)
+        nodes += 1
+        show_board(current)
+        if reached_exit(current):
+            print("A* solved in", current.moves, "moves | states explored:", nodes)
+            return current, trace_back(parents, states, current), nodes
+        for neighbour in next_states(current):
+            if neighbour not in visited:
+                visited.add(neighbour)
+                parents[id(neighbour)] = id(current)
+                states[id(neighbour)] = neighbour
+                f_score = neighbour.moves + heurestic(neighbour)
+                heapq.heappush(heap, (f_score, next(tie_breaker), neighbour))
+    return None, [], nodes
 # SAVE SOLUTION AS GIF
 # Goes through each step in the solution and draws the board as a coloured image with rounded vehicle rectangles.
 # Saves all frames as a looping GIF using a simple for loop.
 # PIL stitches the frames — no animation library needed.
 def save_solution_gif(path, title, save_to):
-  "Saves the solution path as a nicely animated GIF"
-if not path:
-  return
-import io
-from PIL import Image
-import matplotlib.patches as mpatches
-# fixed colour for each vehicle
-vehicle_colours = {'R': '#E74C3C', 'A': '#3498DB', 'B': '#2ECC71', 'C': '#F39C12', 'D': '#9B59B6', 'E': '#1ABC9C', 'F': '#E67E22', 'G': '#34495E', 'H': '#E91E63', }
-frames = []  # one image per step of the solution
- for step_num, state in enumerate(path):
+    "Saves the solution path as a nicely animated GIF"
+    if not path:
+        return
+    import io
+    from PIL import Image
+    import matplotlib.patches as mpatches
+    # fixed colour for each vehicle
+    vehicle_colours = {'R': '#E74C3C', 'A': '#3498DB', 'B': '#2ECC71', 'C': '#F39C12', 'D': '#9B59B6', 'E': '#1ABC9C', 'F': '#E67E22', 'G': '#34495E', 'H': '#E91E63', }
+    frames = []  # one image per step of the solution
+    for step_num, state in enumerate(path):
         fig, ax = plt.subplots(figsize=(5, 5.5))    # create one figure for this frame
         ax.set_xlim(0, BOARD_SIZE) 
         ax.set_ylim(0, BOARD_SIZE)
@@ -369,15 +369,15 @@ frames = []  # one image per step of the solution
 #   row 5: .  .  .  H  H  .
 # The red car R must reach column 5. Optimal solution = 6 moves.
 def setup_puzzle():
-  "Returns the starting board for our L2 Rush Hour puzzle."
-return State([Vehicle(1,2,2,'H','R'), 
-              Vehicle(0,0,2,'H','A'), 
-              Vehicle(0,1,3,'V','B'), 
-              Vehicle(3,0,2,'V','C'), 
-              Vehicle(2,3,2,'H','D'),
-              Vehicle(4,1,3,'V','E'),
-              Vehicle(5,3,2,'V','F'),
-              Vehicle(0,4,3,'H','G'),
-              Vehicle(3,5,2,'H','H'),])
+    "Returns the starting board for our L2 Rush Hour puzzle."
+    return State([Vehicle(1,2,2,'H','R'), 
+                  Vehicle(0,0,2,'H','A'), 
+                  Vehicle(0,1,3,'V','B'), 
+                  Vehicle(3,0,2,'V','C'), 
+                  Vehicle(2,3,2,'H','D'),
+                  Vehicle(4,1,3,'V','E'),
+                  Vehicle(5,3,2,'V','F'),
+                  Vehicle(0,4,3,'H','G'),
+                  Vehicle(3,5,2,'H','H'),])
 # MAIN
 # Runs all six algorithm + heuristic combinations and saves a GIF animation for each one.
