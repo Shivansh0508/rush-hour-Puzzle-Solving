@@ -1,5 +1,6 @@
                                                                                 #Rush Hour Puzzle Solver#
                                                                   # Group 15 | CS F401 Artificial intelligence | BITS Pilani 
+# L2 level Complexity Implemented
 #   We solve the Rush Hour puzzle using four search algorithms:
 #   1. BFS    - searches level by level
 #   2. IDDFS  - like BFS but uses much less memory
@@ -364,4 +365,13 @@ frames = []  # one image per step of the solution
     # stitch all frames into one looping GIF
     frames[0].save(save_to, save_all=True, append_images=frames[1:], duration=900, loop=0)  # milliseconds per frame , 0 = loop forever
     print(f"  Saved : {save_to}")
-  
+# PUZZLE SETUP — L2 Medium Difficulty
+# Starting layout:
+#   col:  0  1  2  3  4  5
+#   row 0: A  A  .  C  .  .
+#   row 1: B  .  .  C  E  .
+#   row 2: B  R  R  .  E  .   <= exit is here on the right
+#   row 3: B  .  D  D  E  F
+#   row 4: G  G  G  .  .  F
+#   row 5: .  .  .  H  H  .
+# The red car R must reach column 5. Optimal solution = 6 moves.
