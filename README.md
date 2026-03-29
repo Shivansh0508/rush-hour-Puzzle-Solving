@@ -51,3 +51,7 @@ H2 dominates H1 so A* with H2 explores fewer states .
 | Greedy    | H2        | 6     | 31              |
 | A*        | H1        | 6     | 1039            |
 | A*        | H2        | 6     | 85              |
+
+Same moves = all found the optimal solution.
+Fewer states = smarter and more efficient search.
+A* with H2 explores the fewest states overall.
