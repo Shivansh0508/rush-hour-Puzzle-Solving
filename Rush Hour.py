@@ -23,7 +23,7 @@ os.makedirs("output" , exist_ok=True)   # create the output folder if it does no
 # VEHICLE CLASS 
 # Stores the position , size , direction , and name of one vehicle
 class Vehicle:
- def init(self, x, y, Length, orientation, name):
+ def __init__(self, x, y, Length, orientation, name):
    """  x           : column number, 0 is the left edge
         y           : row number, 0 is the top edge
         length      : how many cells it takes up (2 or 3)
@@ -39,15 +39,15 @@ class Vehicle:
 # It stores where every vehicle is sitting at that moment
 class State:
     """Represents one board configuration at a specific moment."""
-    def init(self, vehicles, moves=0):
+    def __init__(self, vehicles, moves=0):
      """vehicles : list of all Vehicle objects on the board
         moves    : number of moves taken to reach this state"""
         self.vehicles = vehicles
         self.moves = moves
-    def hash(self):
+    def __hash__(self):
         """Needed so Python can store States in a set to track visited ones."""
         return hash(tuple((v.x, v.y) for v in self.vehicles))
-    def eq(self, other):
+    def __eq__(self, other):
         """Two states are the same if every vehicle is at the same position."""
         return all(
             self.vehicles[i].x == other.vehicles[i].x and self.vehicles[i].y == other.vehicles[i].y
@@ -202,7 +202,7 @@ def bfs(start):
       show_board(current)
       if reached_exit(current)
       print("BFS solved in", current.moves, "moves | states explored:", nodes)
-      return current, trace_back(parentss, states, current), nodes
+      return current, trace_back(parents, states, current), nodes
       for neighbour in next_states(current):
         if neighbour not in visited:
           visited.add(neighbour)
@@ -251,23 +251,23 @@ def greedy(start, heuristic):
 heap = []      # priority queue, lowest h(n) goes first
 visited = set([start])
 parents = {id(start): None}
-states = (id(start): start}
+states = {id(start): start}
 nodes = 0
 heapq.heappush(heap, (heuristic(start), next(tie_breaker), start))
 while heap:
-  current = heapq.heappop(heap)
+  _,_, current = heapq.heappop(heap)
   nodes += 1
   show_board(current)
   if reached_exit(current):
     print("Greedy solved in", current.moves, "moves | states explored:", nodes)
-    return current, track_back(parents, states, current), nodes
+    return current, trace_back(parents, states, current), nodes
     for neighbour in next_states(current):
       if neighbour not in visited:
         visited.add(neighbour)
         parents[id(neighbour)] = id(current)
         states[id(neighbour)] = neighbour
         heapq.heappush(heap, (heuristic(neighbour), next(tie_breaker), neighbour))
-        return None, [], nodes
+ return None, [], nodes
 # A* SEARCH
 # Combines actual move cost g(n) with heurestic estimate h(n).
 # f(n) = g(n) + h(n)
@@ -279,7 +279,7 @@ def astar(start, heurestic):
   parents = {id(start): None}
    states = {id(start): start}
     nodes = 0
-heapq.heappush(heap, (heurestic(start) + start.moves, next(tie_breaker), start))
+heapq.heappush(heap, (heurstic(start) + start.moves, next(tie_breaker), start))
 while heap:
    current = heapq.heappop(heap)
   nodes += 1
@@ -291,7 +291,6 @@ for neighbour in next_states(current):
   if neighbour not in visited:
     visited.add(neighbour)
     parents[id(neighbour)] = id(current)
-    states[id(neighbour)] = id(current)
     states[id(neighbour)] = neighbour
     f_score = neighbour.moves + heurestic(neighbour)
     heapq.heappush(heap, (f_score, next(tie_breaker), neighbour))
