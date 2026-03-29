@@ -300,3 +300,8 @@ for neighbour in next_states(current):
     f_score = neighbour.moves + heurestic(neighbour)
     heapq.heappush(heap, (f_score, next(tie_breaker), neighbour))
 return None, [], nodes
+# SAVE SOLUTION AS GIF
+# Goes through each step in the solution and draws the board
+# as a coloured image with rounded vehicle rectangles.
+# Saves all frames as a looping GIF using a simple for loop.
+# PIL stitches the frames — no animation library needed.
