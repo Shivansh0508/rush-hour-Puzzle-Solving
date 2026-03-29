@@ -23,7 +23,7 @@ os.makedirs("output" , exist_ok=True)   # create the output folder if it does no
 # VEHICLE CLASS 
 # Stores the position , size , direction , and name of one vehicle
 class Vehicle:
- def __init__(self, x, y, Length, orientation, name):
+ def __init__(self, x, y, length, orientation, name):
    """  x           : column number, 0 is the left edge
         y           : row number, 0 is the top edge
         length      : how many cells it takes up (2 or 3)
@@ -200,7 +200,7 @@ def bfs(start):
       current = queue.popleft()
       nodes += 1
       show_board(current)
-      if reached_exit(current)
+      if reached_exit(current):
       print("BFS solved in", current.moves, "moves | states explored:", nodes)
       return current, trace_back(parents, states, current), nodes
       for neighbour in next_states(current):
@@ -273,15 +273,15 @@ while heap:
 # f(n) = g(n) + h(n)
 # Guaranteed to find the shortest solution when the heurestic is admissible. Explores far fewer states than BFS.
 def astar(start, heurestic):
-  """A*: picks states with lowest f(n) = g(n) + h(n), optimal and informal."""
+  """A*: picks states with lowest f(n) = g(n) + h(n), optimal and informed."""
   heap = []             # priority queue, lowest f(n) goes first
   visited = set([start])
   parents = {id(start): None}
-   states = {id(start): start}
-    nodes = 0
-heapq.heappush(heap, (heurstic(start) + start.moves, next(tie_breaker), start))
+  states = {id(start): start}
+  nodes = 0
+heapq.heappush(heap, (heurestic(start) + start.moves, next(tie_breaker), start))
 while heap:
-   current = heapq.heappop(heap)
+  _, _, current = heapq.heappop(heap)
   nodes += 1
   show_board(current)
 if reached_exit(current):
