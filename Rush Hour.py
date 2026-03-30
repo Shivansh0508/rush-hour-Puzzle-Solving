@@ -400,7 +400,8 @@ def setup_hard():
         Vehicle(0,4,3,'H','G'),
         Vehicle(3,5,2,'H','H'),
         Vehicle(2,0,2,'V','I'),
-        Vehicle(1,4,2,'H','J'),]) 
+        Vehicle(4,0,2,'H','J')
+    ]) 
 # MAIN
 # Runs all six algorithm + heuristic combinations and saves a GIF animation for each one.
 if __name__ == "__main__":
