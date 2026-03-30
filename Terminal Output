@@ -1,3 +1,5 @@
+[Running] python -u "c:\Users\Shivansh\Desktop\AI Project\# Rush Hour Puzzle Solver.py"
+
 ========== EASY LEVEL ==========
 
 Running BFS
@@ -53,27 +55,27 @@ A* solved in 6 moves | states explored: 85
 ========== HARD LEVEL ==========
 
 Running BFS
-BFS solved in 11 moves | states explored: 3111
+BFS solved in 11 moves | states explored: 1315
   Saved : output/HARD_bfs.gif
 
 Running IDDFS
-IDDFS solved at depth 15 | states explored: 1200
+IDDFS solved at depth 14 | states explored: 1050
   Saved : output/HARD_iddfs.gif
 
 Running Greedy with H1
-Greedy solved in 11 moves | states explored: 50
+Greedy solved in 11 moves | states explored: 41
   Saved : output/HARD_greedy_h1.gif
 
 Running Greedy with H2
-Greedy solved in 11 moves | states explored: 48
+Greedy solved in 11 moves | states explored: 36
   Saved : output/HARD_greedy_h2.gif
 
 Running A* with H1
-A* solved in 11 moves | states explored: 2099
+A* solved in 11 moves | states explored: 932
   Saved : output/HARD_astar_h1.gif
 
 Running A* with H2
-A* solved in 11 moves | states explored: 696
+A* solved in 11 moves | states explored: 335
   Saved : output/HARD_astar_h2.gif
 
-[Done] exited with code=0 in 24.925 seconds
+[Done] exited with code=0 in 27.555 seconds
