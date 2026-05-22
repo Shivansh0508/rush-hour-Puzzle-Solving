@@ -83,16 +83,17 @@ H2 dominates H1 so A* with H2 explores fewer states .
 **Fewer states** = smarter and more efficient search. <br>
  A* with H2 explores the fewest states overall. <br>
 
-##  Easy Level Solutions
+## Easy Level Solutions
 
 | Algorithm | Solution |
-|-----------|----------|
-| BFS | ![](EASY_bfs.gif) |
-| IDDFS | ![](EASY_iddfs.gif) |
-| Greedy H1 | ![](EASY_greedy_h1.gif) |
-| Greedy H2 | ![](EASY_greedy_h2.gif) |
-| A* H1 | ![](EASY_astar_h1.gif) |
-| A* H2 | ![](EASY_astar_h2.gif) |
+|------------|------------|
+| BFS | ![](Easy.gifs/EASY_bfs.gif) |
+| IDDFS | ![](Easy.gifs/EASY_iddfs.gif) |
+| Greedy H1 | ![](Easy.gifs/EASY_greedy_h1.gif) |
+| Greedy H2 | ![](Easy.gifs/EASY_greedy_h2.gif) |
+| A* H1 | ![](Easy.gifs/EASY_astar_h1.gif) |
+| A* H2 | ![](Easy.gifs/EASY_astar_h2.gif) |
+
 
 ---
 
