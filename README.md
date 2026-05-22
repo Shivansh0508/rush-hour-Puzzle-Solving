@@ -110,16 +110,16 @@ H2 dominates H1 so A* with H2 explores fewer states .
 
 ---
 
-##  Hard Level Solutions
+## Hard Level Solutions
 
 | Algorithm | Solution |
-|-----------|----------|
-| BFS | ![](HARD_bfs.gif) |
-| IDDFS | ![](HARD_iddfs.gif) |
-| Greedy H1 | ![](HARD_greedy_h1.gif) |
-| Greedy H2 | ![](HARD_greedy_h2.gif) |
-| A* H1 | ![](HARD_astar_h1.gif) |
-| A* H2 | ![](HARD_astar_h2.gif) |
+|------------|------------|
+| BFS | ![](Hard.gifs/HARD_bfs.gif) |
+| IDDFS | ![](Hard.gifs/HARD_iddfs.gif) |
+| Greedy H1 | ![](Hard.gifs/HARD_greedy_h1.gif) |
+| Greedy H2 | ![](Hard.gifs/HARD_greedy_h2.gif) |
+| A* H1 | ![](Hard.gifs/HARD_astar_h1.gif) |
+| A* H2 | ![](Hard.gifs/HARD_astar_h2.gif) |
 
 
 ## References
