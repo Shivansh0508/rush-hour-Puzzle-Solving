@@ -100,13 +100,13 @@ H2 dominates H1 so A* with H2 explores fewer states .
 ## Medium Level Solutions
 
 | Algorithm | Solution |
-|-----------|----------|
-| BFS | ![](MEDIUM_bfs.gif) |
-| IDDFS | ![](MEDIUM_iddfs.gif) |
-| Greedy H1 | ![](MEDIUM_greedy_h1.gif) |
-| Greedy H2 | ![](MEDIUM_greedy_h2.gif) |
-| A* H1 | ![](MEDIUM_astar_h1.gif) |
-| A* H2 | ![](MEDIUM_astar_h2.gif) |
+|------------|------------|
+| BFS | ![](Medium.gifs/MEDIUM_bfs.gif) |
+| IDDFS | ![](Medium.gifs/MEDIUM_iddfs.gif) |
+| Greedy H1 | ![](Medium.gifs/MEDIUM_greedy_h1.gif) |
+| Greedy H2 | ![](Medium.gifs/MEDIUM_greedy_h2.gif) |
+| A* H1 | ![](Medium.gifs/MEDIUM_astar_h1.gif) |
+| A* H2 | ![](Medium.gifs/MEDIUM_astar_h2.gif) |
 
 ---
 
